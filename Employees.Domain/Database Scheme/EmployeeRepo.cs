@@ -1,30 +1,25 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Employees.Data;
 
-namespace Employees.Domain.Repository.Employee_Repository
+namespace Employees.Domain.Database_Scheme
 {
     public class EmployeeRepo
     {
-        private List<Employee> _employeeList;
+        public List<Employee> EmployeeList { get; set; }
 
         public bool AddEmployee(Employee passedEmployee)
         {
             if (passedEmployee == null) return false;
-            _employeeList.Add(passedEmployee);
+            EmployeeList.Add(passedEmployee);
             return true;
         }
 
         public bool RemoveByOib(string oib)
         {
-            foreach (var employee in _employeeList)
+            foreach (var employee in EmployeeList)
             {
                 if (employee.Oib != oib) continue;
-                _employeeList.Remove(employee);
+                EmployeeList.Remove(employee);
                 return true;
             }
 
