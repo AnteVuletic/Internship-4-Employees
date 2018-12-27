@@ -18,5 +18,6 @@ namespace Employees.Domain.Database_Scheme
             ProjectGuid = pickedProject.Id;
             TimeOnProject = timeOnProject;
         }
+
     }
 }
