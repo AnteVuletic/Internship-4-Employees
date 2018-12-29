@@ -61,6 +61,7 @@
             this.SecondNameLabel.Size = new System.Drawing.Size(85, 20);
             this.SecondNameLabel.TabIndex = 36;
             this.SecondNameLabel.Text = "2nd Name";
+            this.SecondNameLabel.Click += new System.EventHandler(this.SecondNameLabel_Click);
             // 
             // SecondNameTextBox
             // 
@@ -104,6 +105,7 @@
             this.CheckBoxSecondName.TabIndex = 31;
             this.CheckBoxSecondName.Text = "Second name";
             this.CheckBoxSecondName.UseVisualStyleBackColor = true;
+            this.CheckBoxSecondName.CheckedChanged += new System.EventHandler(this.CheckBoxSecondName_CheckedChanged);
             // 
             // BtnCancel
             // 
@@ -139,6 +141,7 @@
             this.ListProjects.Name = "ListProjects";
             this.ListProjects.Size = new System.Drawing.Size(304, 109);
             this.ListProjects.TabIndex = 28;
+            this.ListProjects.SelectedIndexChanged += new System.EventHandler(this.ListProjects_SelectedIndexChanged);
             // 
             // ComboPosition
             // 
@@ -158,6 +161,7 @@
             this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 26;
             this.label6.Text = "Position";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // DateTimeBirthday
             // 
@@ -176,6 +180,7 @@
             this.label5.Size = new System.Drawing.Size(71, 20);
             this.label5.TabIndex = 24;
             this.label5.Text = "Birthday";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label3
             // 
@@ -186,6 +191,7 @@
             this.label3.Size = new System.Drawing.Size(38, 20);
             this.label3.TabIndex = 23;
             this.label3.Text = "OIB";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -196,6 +202,7 @@
             this.label4.Size = new System.Drawing.Size(76, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "Surname";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label2
             // 
@@ -206,6 +213,7 @@
             this.label2.Size = new System.Drawing.Size(53, 20);
             this.label2.TabIndex = 21;
             this.label2.Text = "Name";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -217,6 +225,7 @@
             this.label1.Size = new System.Drawing.Size(237, 39);
             this.label1.TabIndex = 20;
             this.label1.Text = "Edit Employee";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // BtnPrev
             // 
@@ -271,6 +280,7 @@
             this.CurrentPageTextBox.Size = new System.Drawing.Size(34, 23);
             this.CurrentPageTextBox.TabIndex = 42;
             this.CurrentPageTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.CurrentPageTextBox.TextChanged += new System.EventHandler(this.CurrentPageTextBox_TextChanged);
             // 
             // EditEmployee
             // 

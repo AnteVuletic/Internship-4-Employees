@@ -30,7 +30,7 @@
         {
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnEditEmployee = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.BtnDeleteEmployee = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnAdd
@@ -58,14 +58,17 @@
             this.BtnEditEmployee.UseVisualStyleBackColor = false;
             this.BtnEditEmployee.Click += new System.EventHandler(this.BtnEditEmployee_Click);
             // 
-            // button3
+            // BtnDeleteEmployee
             // 
-            this.button3.Location = new System.Drawing.Point(367, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 108);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BtnDeleteEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.BtnDeleteEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.BtnDeleteEmployee.Location = new System.Drawing.Point(367, 12);
+            this.BtnDeleteEmployee.Name = "BtnDeleteEmployee";
+            this.BtnDeleteEmployee.Size = new System.Drawing.Size(150, 108);
+            this.BtnDeleteEmployee.TabIndex = 2;
+            this.BtnDeleteEmployee.Text = "Delete Employee";
+            this.BtnDeleteEmployee.UseVisualStyleBackColor = false;
+            this.BtnDeleteEmployee.Click += new System.EventHandler(this.BtnDeleteEmployee_Click);
             // 
             // ManageEmployees
             // 
@@ -73,7 +76,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(529, 132);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.BtnDeleteEmployee);
             this.Controls.Add(this.BtnEditEmployee);
             this.Controls.Add(this.BtnAdd);
             this.Name = "ManageEmployees";
@@ -86,6 +89,6 @@
 
         private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.Button BtnEditEmployee;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button BtnDeleteEmployee;
     }
 }

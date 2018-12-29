@@ -24,5 +24,11 @@ namespace Employees.Presentation.ManageEmployees
             var editEmployeeWindow = new EditEmployee(_mainRepository);
             editEmployeeWindow.ShowDialog();
         }
+
+        private void BtnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            var deleteEmployeeWindow = new DeleteEmployee(_mainRepository);
+            deleteEmployeeWindow.ShowDialog();
+        }
     }
 }
