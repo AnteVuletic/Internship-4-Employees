@@ -9,15 +9,15 @@ namespace Employees.Domain.Repository
 {
     public class MainRepository
     {
-        private static EmployeeRepo _dataEmployees;
-        private static ProjectRepo _dataProjects;
-        private static List<RelationEmployeeProject> _relationEmployeeProject;
+        public EmployeeRepo DataEmployees { get; set; }
+        public ProjectRepo DataProjects { get; set; }
+        public List<RelationEmployeeProject> RelationEmployeeProject;
 
         public MainRepository()
         {
-            _dataEmployees = new EmployeeRepo();
-            _dataProjects = new ProjectRepo();
-            _relationEmployeeProject = new List<RelationEmployeeProject>();          
+            DataEmployees = new EmployeeRepo();
+            DataProjects = new ProjectRepo();
+            RelationEmployeeProject = new List<RelationEmployeeProject>();          
         }
     }
 }

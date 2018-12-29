@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Employees.Infrastructure.Enums;
 
 namespace Employees.Data
@@ -23,6 +25,7 @@ namespace Employees.Data
             Oib = oib;
             DateBirth = dateBirth;
             Position = position;
+            SecondForename = "Not specified";
         }
         public Employee(string forename,string surname,string oib,DateTime dateBirth,Position position,string secondForename)
         {
@@ -32,6 +35,13 @@ namespace Employees.Data
             DateBirth = dateBirth;
             Position = position;
             SecondForename = secondForename;
+        }
+
+        public override string ToString()
+        {
+            var hasSecond = SecondForename != "Not specified";
+            return $"OIB: {Oib} | Name: {Forename}" + (hasSecond ? $"| {SecondForename}" : " ") +
+                    $"| Surname:{Surname} | Position: {Position.GetType()} | Birthday: {DateBirth:MM/dd/yyyy} ";
         }
     }
 }

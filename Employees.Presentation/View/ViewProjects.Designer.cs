@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.EmployeeList = new System.Windows.Forms.ListView();
+            this.SuspendLayout();
+            // 
+            // ProjectList
+            // 
+            this.EmployeeList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.EmployeeList.Location = new System.Drawing.Point(75, 35);
+            this.EmployeeList.Name = "ProjectList";
+            this.EmployeeList.Size = new System.Drawing.Size(370, 303);
+            this.EmployeeList.TabIndex = 0;
+            this.EmployeeList.UseCompatibleStateImageBehavior = false;
+            // 
+            // ViewProjects
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(479, 441);
+            this.Controls.Add(this.EmployeeList);
+            this.Name = "ViewProjects";
             this.Text = "ViewProjects";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListView EmployeeList;
     }
 }

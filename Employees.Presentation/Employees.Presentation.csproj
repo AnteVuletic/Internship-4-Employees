@@ -52,11 +52,41 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageEmployees\AddEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageEmployees\AddEmployee.Designer.cs">
+      <DependentUpon>AddEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageEmployees\DeleteEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageEmployees\DeleteEmployee.Designer.cs">
+      <DependentUpon>DeleteEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageEmployees\EditEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageEmployees\EditEmployee.Designer.cs">
+      <DependentUpon>EditEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageEmployees\ManageEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ManageEmployees\ManageEmployees.Designer.cs">
       <DependentUpon>ManageEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageProjects\AddProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageProjects\AddProject.Designer.cs">
+      <DependentUpon>AddProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageProjects\EditProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageProjects\EditProject.Designer.cs">
+      <DependentUpon>EditProject.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageProjects\ManageProjects.cs">
       <SubType>Form</SubType>
@@ -64,10 +94,31 @@
     <Compile Include="ManageProjects\ManageProjects.Designer.cs">
       <DependentUpon>ManageProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageProjects\RemoveProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageProjects\RemoveProject.Designer.cs">
+      <DependentUpon>RemoveProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\ViewEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ViewEmployees.Designer.cs">
+      <DependentUpon>ViewEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewProjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ViewProjects.Designer.cs">
+      <DependentUpon>ViewProjects.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageEmployees\AddEmployee.resx">
+      <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageEmployees\ManageEmployees.resx">
       <DependentUpon>ManageEmployees.cs</DependentUpon>
@@ -84,6 +135,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\ViewEmployees.resx">
+      <DependentUpon>ViewEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ViewProjects.resx">
+      <DependentUpon>ViewProjects.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -98,6 +155,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Employees.Data\Employees.Data.csproj">
+      <Project>{a055ace2-2f14-43e6-be07-1e90be269b01}</Project>
+      <Name>Employees.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Employees.Domain\Employees.Domain.csproj">
       <Project>{27845f87-269d-4abe-9938-86efb7a09b54}</Project>
       <Name>Employees.Domain</Name>

@@ -28,66 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.BtnManageEmployees = new System.Windows.Forms.Button();
+            this.BtnManageProjects = new System.Windows.Forms.Button();
+            this.BtnViewEmployees = new System.Windows.Forms.Button();
+            this.BtnViewProjects = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // BtnManageEmployees
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(201, 112);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Manage Employees";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnManageEmployees.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnManageEmployees.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.BtnManageEmployees.Location = new System.Drawing.Point(12, 12);
+            this.BtnManageEmployees.Name = "BtnManageEmployees";
+            this.BtnManageEmployees.Size = new System.Drawing.Size(201, 112);
+            this.BtnManageEmployees.TabIndex = 0;
+            this.BtnManageEmployees.Text = "Manage Employees";
+            this.BtnManageEmployees.UseVisualStyleBackColor = false;
+            this.BtnManageEmployees.Click += new System.EventHandler(this.BtnManageEmployees_Click);
             // 
-            // button2
+            // BtnManageProjects
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.button2.Location = new System.Drawing.Point(305, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(201, 112);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Manage Projects";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.BtnManageProjects.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BtnManageProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.BtnManageProjects.Location = new System.Drawing.Point(305, 12);
+            this.BtnManageProjects.Name = "BtnManageProjects";
+            this.BtnManageProjects.Size = new System.Drawing.Size(201, 112);
+            this.BtnManageProjects.TabIndex = 1;
+            this.BtnManageProjects.Text = "Manage Projects";
+            this.BtnManageProjects.UseVisualStyleBackColor = false;
+            this.BtnManageProjects.Click += new System.EventHandler(this.BtnManageProjects_Click);
             // 
-            // button3
+            // BtnViewEmployees
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.Info;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.button3.Location = new System.Drawing.Point(12, 168);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(201, 110);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "View Employees";
-            this.button3.UseVisualStyleBackColor = false;
+            this.BtnViewEmployees.BackColor = System.Drawing.SystemColors.Info;
+            this.BtnViewEmployees.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.BtnViewEmployees.Location = new System.Drawing.Point(12, 168);
+            this.BtnViewEmployees.Name = "BtnViewEmployees";
+            this.BtnViewEmployees.Size = new System.Drawing.Size(201, 110);
+            this.BtnViewEmployees.TabIndex = 2;
+            this.BtnViewEmployees.Text = "View Employees";
+            this.BtnViewEmployees.UseVisualStyleBackColor = false;
+            this.BtnViewEmployees.Click += new System.EventHandler(this.BtnViewEmployees_Click);
             // 
-            // button4
+            // BtnViewProjects
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.Info;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.button4.Location = new System.Drawing.Point(305, 168);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(201, 110);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "View Projects";
-            this.button4.UseVisualStyleBackColor = false;
+            this.BtnViewProjects.BackColor = System.Drawing.SystemColors.Info;
+            this.BtnViewProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.BtnViewProjects.Location = new System.Drawing.Point(305, 168);
+            this.BtnViewProjects.Name = "BtnViewProjects";
+            this.BtnViewProjects.Size = new System.Drawing.Size(201, 110);
+            this.BtnViewProjects.TabIndex = 3;
+            this.BtnViewProjects.Text = "View Projects";
+            this.BtnViewProjects.UseVisualStyleBackColor = false;
+            this.BtnViewProjects.Click += new System.EventHandler(this.BtnViewProjects_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 290);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnViewProjects);
+            this.Controls.Add(this.BtnViewEmployees);
+            this.Controls.Add(this.BtnManageProjects);
+            this.Controls.Add(this.BtnManageEmployees);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MainForm";
             this.Text = "Project manager";
@@ -97,10 +100,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button BtnManageEmployees;
+        private System.Windows.Forms.Button BtnManageProjects;
+        private System.Windows.Forms.Button BtnViewEmployees;
+        private System.Windows.Forms.Button BtnViewProjects;
     }
 }
 
