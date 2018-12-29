@@ -23,12 +23,12 @@ namespace Employees.Presentation.ManageEmployees
             _mainRepository = mainRepository;           
             SecondNameLabel.Hide();
             SecondNameTextBox.Hide();
-            FillDropDown();
+            FillDropDownPosition();
         }
 
-        private void FillDropDown()
+        private void FillDropDownPosition()
         {
-            var positionNames = System.Enum.GetNames(typeof(Position));
+            var positionNames = Enum.GetNames(typeof(Position));
             foreach (var positionName in positionNames)
             {
                 ComboPosition.Items.Add(positionName);

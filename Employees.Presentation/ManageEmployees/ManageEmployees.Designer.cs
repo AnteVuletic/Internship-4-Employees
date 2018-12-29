@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.BtnAdd = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnEditEmployee = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -46,14 +46,17 @@
             this.BtnAdd.UseVisualStyleBackColor = false;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
-            // button2
+            // BtnEditEmployee
             // 
-            this.button2.Location = new System.Drawing.Point(192, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 108);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnEditEmployee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnEditEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.BtnEditEmployee.Location = new System.Drawing.Point(192, 12);
+            this.BtnEditEmployee.Name = "BtnEditEmployee";
+            this.BtnEditEmployee.Size = new System.Drawing.Size(150, 108);
+            this.BtnEditEmployee.TabIndex = 1;
+            this.BtnEditEmployee.Text = "Edit Employee";
+            this.BtnEditEmployee.UseVisualStyleBackColor = false;
+            this.BtnEditEmployee.Click += new System.EventHandler(this.BtnEditEmployee_Click);
             // 
             // button3
             // 
@@ -71,7 +74,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(529, 132);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.BtnEditEmployee);
             this.Controls.Add(this.BtnAdd);
             this.Name = "ManageEmployees";
             this.Text = "ManageEmployees";
@@ -82,7 +85,7 @@
         #endregion
 
         private System.Windows.Forms.Button BtnAdd;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnEditEmployee;
         private System.Windows.Forms.Button button3;
     }
 }

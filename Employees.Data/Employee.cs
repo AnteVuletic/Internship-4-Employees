@@ -25,7 +25,6 @@ namespace Employees.Data
             Oib = oib;
             DateBirth = dateBirth;
             Position = position;
-            SecondForename = "Not specified";
         }
         public Employee(string forename,string surname,string oib,DateTime dateBirth,Position position,string secondForename)
         {
@@ -39,7 +38,7 @@ namespace Employees.Data
 
         public override string ToString()
         {
-            var hasSecond = SecondForename != "Not specified";
+            var hasSecond = SecondForename != null;
             return $"OIB: {Oib} | Name: {Forename}" + (hasSecond ? $"| {SecondForename}" : " ") +
                     $"| Surname:{Surname} | Position: {Position.GetType()} | Birthday: {DateBirth:MM/dd/yyyy} ";
         }

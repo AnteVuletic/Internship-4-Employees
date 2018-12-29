@@ -18,5 +18,11 @@ namespace Employees.Presentation.ManageEmployees
             var addEmployeeWindow = new AddEmployee(_mainRepository);
             addEmployeeWindow.ShowDialog();
         }
+
+        private void BtnEditEmployee_Click(object sender, EventArgs e)
+        {
+            var editEmployeeWindow = new EditEmployee(_mainRepository);
+            editEmployeeWindow.ShowDialog();
+        }
     }
 }
