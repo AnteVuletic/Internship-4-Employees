@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Employees.Domain.Repository;
 
 namespace Employees.Presentation.ManageProjects
 {
     public partial class RemoveProject : Form
     {
-        public RemoveProject()
+        public RemoveProject(MainRepository mainRepository)
         {
             InitializeComponent();
         }

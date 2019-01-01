@@ -36,7 +36,7 @@ namespace Employees.Presentation
 
         private void BtnManageProjects_Click(object sender, EventArgs e)
         {
-            var manageProjectsWindow = new ManageProjects.ManageProjects();
+            var manageProjectsWindow = new ManageProjects.ManageProjects(_mainRepository);
             manageProjectsWindow.ShowDialog();
         }
 

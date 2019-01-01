@@ -39,8 +39,8 @@ namespace Employees.Data
         public override string ToString()
         {
             var hasSecond = SecondForename != null;
-            return $"OIB: {Oib} | Name: {Forename}" + (hasSecond ? $"| {SecondForename}" : " ") +
-                    $"| Surname:{Surname} | Position: {Position.GetType()} | Birthday: {DateBirth:MM/dd/yyyy} ";
+            return $"OIB: {Oib} | Name: {Forename}" + (hasSecond ? $"| Second name: {SecondForename}" : " ") +
+                    $"| Surname:{Surname} | Position: {Position.ToString()} | Birthday: {DateBirth:MM/dd/yyyy} ";
         }
     }
 }

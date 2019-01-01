@@ -28,60 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnDeleteProject = new System.Windows.Forms.Button();
+            this.BtnEditProject = new System.Windows.Forms.Button();
+            this.BtnAddProject = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button3
+            // BtnDeleteProject
             // 
-            this.button3.Location = new System.Drawing.Point(367, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 108);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.BtnDeleteProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnDeleteProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.BtnDeleteProject.Location = new System.Drawing.Point(367, 12);
+            this.BtnDeleteProject.Name = "BtnDeleteProject";
+            this.BtnDeleteProject.Size = new System.Drawing.Size(150, 108);
+            this.BtnDeleteProject.TabIndex = 5;
+            this.BtnDeleteProject.Text = "Delete project";
+            this.BtnDeleteProject.UseVisualStyleBackColor = false;
+            this.BtnDeleteProject.Click += new System.EventHandler(this.BtnDeleteProject_Click);
             // 
-            // button2
+            // BtnEditProject
             // 
-            this.button2.Location = new System.Drawing.Point(192, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 108);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.BtnEditProject.BackColor = System.Drawing.Color.Turquoise;
+            this.BtnEditProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.BtnEditProject.Location = new System.Drawing.Point(192, 12);
+            this.BtnEditProject.Name = "BtnEditProject";
+            this.BtnEditProject.Size = new System.Drawing.Size(150, 108);
+            this.BtnEditProject.TabIndex = 4;
+            this.BtnEditProject.Text = "Edit project";
+            this.BtnEditProject.UseVisualStyleBackColor = false;
+            this.BtnEditProject.Click += new System.EventHandler(this.BtnEditProject_Click);
             // 
-            // button1
+            // BtnAddProject
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 108);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnAddProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BtnAddProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.BtnAddProject.Location = new System.Drawing.Point(12, 12);
+            this.BtnAddProject.Name = "BtnAddProject";
+            this.BtnAddProject.Size = new System.Drawing.Size(150, 108);
+            this.BtnAddProject.TabIndex = 3;
+            this.BtnAddProject.Text = "Add Project";
+            this.BtnAddProject.UseVisualStyleBackColor = false;
+            this.BtnAddProject.Click += new System.EventHandler(this.BtnAddProject_Click);
             // 
             // ManageProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(531, 131);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnDeleteProject);
+            this.Controls.Add(this.BtnEditProject);
+            this.Controls.Add(this.BtnAddProject);
             this.Name = "ManageProjects";
             this.Text = "ManageProjects";
-            this.Load += new System.EventHandler(this.ManageProjects_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnDeleteProject;
+        private System.Windows.Forms.Button BtnEditProject;
+        private System.Windows.Forms.Button BtnAddProject;
     }
 }

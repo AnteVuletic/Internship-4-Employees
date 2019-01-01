@@ -11,7 +11,7 @@ namespace Employees.Domain.Repository
     {
         public EmployeeRepo DataEmployees { get; set; }
         public ProjectRepo DataProjects { get; set; }
-        public List<RelationEmployeeProject> RelationEmployeeProject;
+        public List<RelationEmployeeProject> RelationEmployeeProject { get; set; }
 
         public MainRepository()
         {

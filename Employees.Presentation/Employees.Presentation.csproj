@@ -129,6 +129,9 @@
     <EmbeddedResource Include="ManageEmployees\ManageEmployees.resx">
       <DependentUpon>ManageEmployees.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageProjects\AddProject.resx">
+      <DependentUpon>AddProject.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManageProjects\ManageProjects.resx">
       <DependentUpon>ManageProjects.cs</DependentUpon>
     </EmbeddedResource>
