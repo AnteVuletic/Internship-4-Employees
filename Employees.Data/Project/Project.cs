@@ -22,8 +22,8 @@ namespace Employees.Data.Project
 
         public override string ToString()
         {
-            return base.ToString() + (IsActive ? "\n Active" : "\n Not Active") + (IsFinished ? " Project finished" : " Project being worked on") 
-                   + $" Start date: {StartDate:MM/dd/yyyy}"  + $" End date: {EndDate:MM/dd/yyyy}";
+            return base.ToString() + (IsActive ? " | Active" : " | Not Active") + (IsFinished ? " | Project finished" : " | Project being worked on") 
+                   + $" | Start date: {StartDate:MM/dd/yyyy}"  + $" | End date: {EndDate:MM/dd/yyyy}";
         }
     }
 }

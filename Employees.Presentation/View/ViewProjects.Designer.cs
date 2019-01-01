@@ -37,17 +37,17 @@
             this.ProjectList.Location = new System.Drawing.Point(12, 12);
             this.ProjectList.MultiSelect = false;
             this.ProjectList.Name = "ProjectList";
-            this.ProjectList.Size = new System.Drawing.Size(455, 417);
+            this.ProjectList.Size = new System.Drawing.Size(707, 417);
             this.ProjectList.TabIndex = 0;
             this.ProjectList.TileSize = new System.Drawing.Size(268, 268);
             this.ProjectList.UseCompatibleStateImageBehavior = false;
-            this.ProjectList.View = System.Windows.Forms.View.Tile;
+            this.ProjectList.View = System.Windows.Forms.View.List;
             // 
             // ViewProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(479, 441);
+            this.ClientSize = new System.Drawing.Size(731, 441);
             this.Controls.Add(this.ProjectList);
             this.Name = "ViewProjects";
             this.Text = "ViewProjects";

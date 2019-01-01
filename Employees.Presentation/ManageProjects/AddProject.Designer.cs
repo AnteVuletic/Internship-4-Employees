@@ -152,7 +152,7 @@
             // 
             this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.BtnSave.Location = new System.Drawing.Point(18, 479);
+            this.BtnSave.Location = new System.Drawing.Point(16, 497);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(101, 30);
             this.BtnSave.TabIndex = 10;
@@ -164,7 +164,7 @@
             // 
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.BtnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.BtnCancel.Location = new System.Drawing.Point(236, 479);
+            this.BtnCancel.Location = new System.Drawing.Point(237, 497);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(101, 30);
             this.BtnCancel.TabIndex = 11;
@@ -194,7 +194,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(363, 516);
+            this.ClientSize = new System.Drawing.Size(363, 539);
             this.Controls.Add(this.IsActiveCheckBox);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnSave);

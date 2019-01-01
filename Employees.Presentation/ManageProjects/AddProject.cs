@@ -11,6 +11,7 @@ using Employees.Data;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
+using Employees.Presentation.ManageEmployees.Popouts;
 
 namespace Employees.Presentation.ManageProjects
 {
@@ -47,6 +48,7 @@ namespace Employees.Presentation.ManageProjects
                 EndDatePicker.Show();
                 EndDatePicker.Enabled = false;
                 IsActiveCheckBox.Show();
+                _project.Name = _projectPlan.Name;
             }
             else
             {
@@ -99,7 +101,8 @@ namespace Employees.Presentation.ManageProjects
             {
                 foreach (var selectedEmployee in _selectedEmployees)
                 {
-                    _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(selectedEmployee, _project, 2));
+                    var popoutEmployeeSelectedWeeklyTime = new EmployeeTime(_mainRepository,selectedEmployee,_project);
+                    popoutEmployeeSelectedWeeklyTime.ShowDialog();
                 }
                 _mainRepository.DataProjects.AddProject(_project);
             }
