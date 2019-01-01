@@ -76,10 +76,10 @@
     <Compile Include="ManageEmployees\ManageEmployees.Designer.cs">
       <DependentUpon>ManageEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManageEmployees\Popouts\EmployeeTime.cs">
+    <Compile Include="ManageProjects\Popouts\EmployeeTime.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageEmployees\Popouts\EmployeeTime.Designer.cs">
+    <Compile Include="ManageProjects\Popouts\EmployeeTime.Designer.cs">
       <DependentUpon>EmployeeTime.cs</DependentUpon>
     </Compile>
     <Compile Include="ManageProjects\AddProject.cs">
@@ -135,7 +135,10 @@
     <EmbeddedResource Include="ManageEmployees\ManageEmployees.resx">
       <DependentUpon>ManageEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageEmployees\Popouts\EmployeeTime.resx">
+    <EmbeddedResource Include="ManageProjects\EditProject.resx">
+      <DependentUpon>EditProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageProjects\Popouts\EmployeeTime.resx">
       <DependentUpon>EmployeeTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageProjects\AddProject.resx">

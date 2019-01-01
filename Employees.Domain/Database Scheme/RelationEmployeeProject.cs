@@ -11,6 +11,12 @@ namespace Employees.Domain.Database_Scheme
         public int TimeOnProjectWeek { get; set; }
         public static int IdRelation { get; private set; }
 
+        public RelationEmployeeProject(Employee pickedEmployee, ProjectPlan pickedProject)
+        {
+            IdRelation++;
+            EmployeeOib = pickedEmployee.Oib;
+            ProjectGuid = pickedProject.Id;
+        }
         public RelationEmployeeProject(Employee pickedEmployee, ProjectPlan pickedProject,int timeOnProjectWeek)
         {
             IdRelation++;
@@ -19,5 +25,12 @@ namespace Employees.Domain.Database_Scheme
             TimeOnProjectWeek = timeOnProjectWeek;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is RelationEmployeeProject))
+                return false;
+            return ((RelationEmployeeProject) obj).EmployeeOib == EmployeeOib &&
+                   ((RelationEmployeeProject) obj).ProjectGuid == ProjectGuid;
+        }
     }
 }
