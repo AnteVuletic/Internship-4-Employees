@@ -17,9 +17,9 @@ namespace Employees.Presentation.ManageProjects
     public partial class AddProject : Form
     {
         private MainRepository _mainRepository;
-        private Project _project;
-        private ProjectPlan _projectPlan;
-        private List<Employee> _selectedEmployees;
+        private Project _project = new Project("",DateTime.Now,DateTime.Now, true,false);
+        private ProjectPlan _projectPlan = new ProjectPlan("");
+        private List<Employee> _selectedEmployees = new List<Employee>();
         public AddProject(MainRepository mainRepository)
         {
             InitializeComponent();
@@ -31,18 +31,8 @@ namespace Employees.Presentation.ManageProjects
         {
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())
             {
-                EmployeeCheckedList.Items.Add(employee.ToString());
+                EmployeeCheckedList.Items.Add(employee);
             }
-        }
-
-
-        private void EmployeeCheckedList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var selectedEmployee = EmployeeCheckedList.SelectedItem as Employee;
-            if (EmployeeCheckedList.GetItemChecked(EmployeeCheckedList.SelectedItem.GetHashCode()))
-                _selectedEmployees.Add(selectedEmployee);
-            else
-                _selectedEmployees.Remove(selectedEmployee);
         }
 
         private void RealCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -113,6 +103,20 @@ namespace Employees.Presentation.ManageProjects
                 }
                 _mainRepository.DataProjects.AddProject(_project);
             }
+
+            Close();
+        }
+
+        private void EmployeeCheckedList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var employeeSelected = EmployeeCheckedList.SelectedItem as Employee;
+            foreach (var Employee in _selectedEmployees)
+            {
+                if (Employee != employeeSelected) continue;
+                _selectedEmployees.Remove(Employee);
+                return;
+            }
+            _selectedEmployees.Add(employeeSelected);
         }
     }
 

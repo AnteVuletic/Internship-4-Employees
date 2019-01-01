@@ -7,10 +7,15 @@ namespace Employees.Data.Project
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        protected ProjectPlan(string name)
+        public ProjectPlan(string name)
         {
             Id = Guid.NewGuid();
             Name = name;
+        }
+
+        public override string ToString()
+        {
+            return $"Name {Name}";
         }
     }
 }

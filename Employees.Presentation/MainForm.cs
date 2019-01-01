@@ -48,7 +48,7 @@ namespace Employees.Presentation
 
         private void BtnViewProjects_Click(object sender, EventArgs e)
         {
-            var viewProjectsWindow = new View.ViewProjects();
+            var viewProjectsWindow = new View.ViewProjects(_mainRepository);
             viewProjectsWindow.ShowDialog();
         }
     }

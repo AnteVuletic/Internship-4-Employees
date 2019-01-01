@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.EmployeeList = new System.Windows.Forms.ListView();
+            this.ProjectList = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // ProjectList
             // 
-            this.EmployeeList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.EmployeeList.Location = new System.Drawing.Point(75, 35);
-            this.EmployeeList.Name = "ProjectList";
-            this.EmployeeList.Size = new System.Drawing.Size(370, 303);
-            this.EmployeeList.TabIndex = 0;
-            this.EmployeeList.UseCompatibleStateImageBehavior = false;
+            this.ProjectList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.ProjectList.Location = new System.Drawing.Point(12, 12);
+            this.ProjectList.MultiSelect = false;
+            this.ProjectList.Name = "ProjectList";
+            this.ProjectList.Size = new System.Drawing.Size(455, 417);
+            this.ProjectList.TabIndex = 0;
+            this.ProjectList.TileSize = new System.Drawing.Size(268, 268);
+            this.ProjectList.UseCompatibleStateImageBehavior = false;
+            this.ProjectList.View = System.Windows.Forms.View.Tile;
             // 
             // ViewProjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(479, 441);
-            this.Controls.Add(this.EmployeeList);
+            this.Controls.Add(this.ProjectList);
             this.Name = "ViewProjects";
             this.Text = "ViewProjects";
             this.ResumeLayout(false);
@@ -54,6 +57,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView EmployeeList;
+        private System.Windows.Forms.ListView ProjectList;
     }
 }

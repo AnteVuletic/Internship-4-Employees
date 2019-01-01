@@ -19,5 +19,11 @@ namespace Employees.Data.Project
             IsActive = isActive;
             IsFinished = isFinished;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + (IsActive ? "\n Active" : "\n Not Active") + (IsFinished ? " Project finished" : " Project being worked on") 
+                   + $" Start date: {StartDate:MM/dd/yyyy}"  + $" End date: {EndDate:MM/dd/yyyy}";
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace Employees.Domain.Database_Scheme
 {
     public class EmployeeRepo
     {
-        public static List<Employee> EmployeeList = new List<Employee>();
+        private static List<Employee> EmployeeList = new List<Employee>();
 
         public bool AddEmployee(Employee passedEmployee)
         {

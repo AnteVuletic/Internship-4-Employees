@@ -7,7 +7,7 @@ namespace Employees.Domain.Database_Scheme
 {
     public class ProjectRepo
     {
-        public List<ProjectPlan> ProjectList { get; set; }
+        public static List<ProjectPlan> ProjectList = new List<ProjectPlan>();
 
 
         public bool AddProject(ProjectPlan passedProject)
@@ -39,5 +39,7 @@ namespace Employees.Domain.Database_Scheme
 
             return false;
         }
+
+        public List<ProjectPlan> GetAllProjects => ProjectList;
     }
 }
