@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.SelectedEmployeeList = new System.Windows.Forms.ListView();
             this.RealCheckbox = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // IsActiveCheckBox
@@ -106,6 +107,8 @@
             this.EmployeeCheckedList.Name = "EmployeeCheckedList";
             this.EmployeeCheckedList.Size = new System.Drawing.Size(322, 148);
             this.EmployeeCheckedList.TabIndex = 21;
+            this.EmployeeCheckedList.SelectedIndexChanged += new System.EventHandler(this.EmployeeCheckedList_SelectedIndexChanged);
+            // 
             // EmployeeLabel
             // 
             this.EmployeeLabel.AutoSize = true;
@@ -167,12 +170,19 @@
             // 
             // SelectedEmployeeList
             // 
-            this.SelectedEmployeeList.Location = new System.Drawing.Point(25, 429);
+            this.SelectedEmployeeList.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.SelectedEmployeeList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SelectedEmployeeList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.SelectedEmployeeList.FullRowSelect = true;
+            this.SelectedEmployeeList.GridLines = true;
+            this.SelectedEmployeeList.Location = new System.Drawing.Point(24, 446);
+            this.SelectedEmployeeList.MultiSelect = false;
             this.SelectedEmployeeList.Name = "SelectedEmployeeList";
             this.SelectedEmployeeList.Size = new System.Drawing.Size(321, 114);
             this.SelectedEmployeeList.TabIndex = 27;
             this.SelectedEmployeeList.UseCompatibleStateImageBehavior = false;
             this.SelectedEmployeeList.View = System.Windows.Forms.View.List;
+            this.SelectedEmployeeList.SelectedIndexChanged += new System.EventHandler(this.SelectedEmployeeList_SelectedIndexChanged);
             // 
             // RealCheckbox
             // 
@@ -185,11 +195,22 @@
             this.RealCheckbox.Text = "Real project";
             this.RealCheckbox.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(50, 430);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(285, 13);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Press on the employee if you wish to edit the time per week";
+            // 
             // EditProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(362, 603);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.SelectedEmployeeList);
             this.Controls.Add(this.IsActiveCheckBox);
             this.Controls.Add(this.BtnCancel);
@@ -227,5 +248,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView SelectedEmployeeList;
         private System.Windows.Forms.CheckBox RealCheckbox;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -42,5 +42,10 @@ namespace Employees.Data
             return $"OIB: {Oib} | Name: {Forename}" + (hasSecond ? $"| Second name: {SecondForename}" : " ") +
                     $"| Surname:{Surname} | Position: {Position.ToString()} | Birthday: {DateBirth:MM/dd/yyyy} ";
         }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj) || obj.ToString() == ToString();
+        }
     }
 }

@@ -19,5 +19,15 @@ namespace Employees.Domain.Repository
             DataProjects = new ProjectRepo();
             RelationEmployeeProject = new List<RelationEmployeeProject>();          
         }
+
+        public int GetIndexOfRelation(RelationEmployeeProject argRelation)
+        {
+            for (var relationIndex = 0; relationIndex < RelationEmployeeProject.Count; relationIndex++)
+            {
+                if (!RelationEmployeeProject[relationIndex].Equals(argRelation)) continue;
+                return relationIndex;
+            }
+            throw new Exception("Relation not found");
+        }
     }
 }
