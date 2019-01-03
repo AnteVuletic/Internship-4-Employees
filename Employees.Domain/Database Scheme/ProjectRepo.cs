@@ -40,6 +40,6 @@ namespace Employees.Domain.Database_Scheme
             return false;
         }
 
-        public List<ProjectPlan> GetAllProjects => ProjectList;
+        public List<ProjectPlan> GetAllProjects() => ProjectList;
     }
 }

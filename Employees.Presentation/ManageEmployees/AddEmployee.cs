@@ -37,7 +37,7 @@ namespace Employees.Presentation.ManageEmployees
 
         private void FillListOfProjects()
         {
-            foreach (var project in _mainRepository.DataProjects.GetAllProjects)
+            foreach (var project in _mainRepository.DataProjects.GetAllProjects())
             {
                 ListProjects.Items.Add(project);
             }

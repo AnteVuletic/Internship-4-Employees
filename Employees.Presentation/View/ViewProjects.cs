@@ -24,7 +24,7 @@ namespace Employees.Presentation.View
 
         public void RefreshProjectList()
         {
-            foreach (var project in _mainRepository.DataProjects.GetAllProjects)
+            foreach (var project in _mainRepository.DataProjects.GetAllProjects())
             {
                 if (project is Project project1)
                     ProjectList.Items.Add(project1.ToString());

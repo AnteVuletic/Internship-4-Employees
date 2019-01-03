@@ -31,6 +31,8 @@ namespace Employees.Presentation.ManageProjects
         }
         public void FillEmployeeList()
         {
+            _selectedEmployees.Clear();
+            EmployeeCheckedList.Items.Clear();
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())
             {
                 EmployeeCheckedList.Items.Add(employee);
@@ -51,18 +53,28 @@ namespace Employees.Presentation.ManageProjects
         }
         public void GetCurrentProject()
         {
-            if (_mainRepository.DataProjects.GetAllProjects[_currentProjectIndex] is Project)
-                _currentProject = (Project) _mainRepository.DataProjects.GetAllProjects[_currentProjectIndex];
+            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
+                _currentProject = (Project) _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex];
             else
-                _currentProjectPlan = _mainRepository.DataProjects.GetAllProjects[_currentProjectIndex];
+                _currentProjectPlan = _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex];
         }
         public void CurrentProjectInfo()
         {
             GetCurrentProject();
-            if (!(_mainRepository.DataProjects.GetAllProjects[_currentProjectIndex] is Project))
+            if (!(_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project))
             {
                 NameTextBox.Text = _currentProjectPlan.Name;
                 RealCheckbox.Checked = false;
+                ProjectStartLabel.Hide();
+                ProjectEndLabel.Hide();
+                EmployeeLabel.Hide();
+                SelectedEmployeeControlLabel.Hide();
+                EmployeeCheckedList.Hide();
+                SelectedEmployeeList.Hide();
+                StartDatePicker.Hide();
+                EndDatePicker.Hide();
+                IsActiveCheckBox.Hide();
+
             }
             else
             {
@@ -72,19 +84,31 @@ namespace Employees.Presentation.ManageProjects
                 EndDatePicker.Value = _currentProject.EndDate;
                 FillEmployeeList();
                 RefreshSelectedEmployeeList();
+                ProjectStartLabel.Show();
+                ProjectEndLabel.Show();
+                EmployeeLabel.Show();
+                SelectedEmployeeControlLabel.Show();
+                EmployeeCheckedList.Show();
+                SelectedEmployeeList.Show();
+                StartDatePicker.Show();
+                EndDatePicker.Show();
+                IsActiveCheckBox.Show();
             }
 
+            CurrentProjectTextBox.Text =
+                $@"{(_currentProjectIndex+1).ToString()} / {_mainRepository.DataProjects.GetAllProjects().Count}";
         }
 
         private void EmployeeCheckedList_SelectedIndexChanged(object sender, EventArgs e)
         {
             EmployeeCheckedList.SetItemChecked(EmployeeCheckedList.SelectedIndex, true);
             var employeeSelected = EmployeeCheckedList.SelectedItem as Employee;
-            foreach (var Employee in _selectedEmployees)
+            foreach (var employee in _selectedEmployees)
             {
-                if (Employee != employeeSelected) continue;
+                if (!employee.Equals(employeeSelected)) continue;
                 EmployeeCheckedList.SetItemChecked(EmployeeCheckedList.SelectedIndex, false);
-                _selectedEmployees.Remove(Employee);
+                _selectedEmployees.Remove(employee);
+                _mainRepository.RelationEmployeeProject.Remove(new RelationEmployeeProject(employee, _currentProject));
                 RefreshSelectedEmployeeList();
                 return;
             }
@@ -103,6 +127,71 @@ namespace Employees.Presentation.ManageProjects
                     .TimeOnProjectWeek);
             popoutItemSelected.ShowDialog();
             SelectedEmployeeList.SelectedItems.Clear();        
+        }
+
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
+                _currentProject.Name = NameTextBox.Text;
+            else
+                _currentProjectPlan.Name = NameTextBox.Text;
+        }
+
+        private void StartDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            _currentProject.StartDate = StartDatePicker.Value;
+            EndDatePicker.Enabled = true;
+            EndDatePicker.MinDate = StartDatePicker.Value;
+        }
+
+        private void EndDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            _currentProject.EndDate = EndDatePicker.Value;
+        }
+
+        private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            _currentProject.IsActive = IsActiveCheckBox.Checked;
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void RealCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
+                return;
+            _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = new Project(_currentProjectPlan.Name, DateTime.Now, DateTime.Now,true,false);
+            CurrentProjectInfo();
+        }
+
+        private void BtnLastProject_Click(object sender, EventArgs e)
+        {
+            if (_currentProjectIndex == _mainRepository.DataProjects.GetAllProjects().Count - 1) return;
+            _currentProjectIndex = _mainRepository.DataProjects.GetAllProjects().Count() - 1;
+            CurrentProjectInfo();
+        }
+
+        private void BtnNextProject_Click(object sender, EventArgs e)
+        {
+            if (_currentProjectIndex == _mainRepository.DataProjects.GetAllProjects().Count - 1) return;
+            _currentProjectIndex++;
+            CurrentProjectInfo();
+        }
+
+        private void BtnPrevProject_Click(object sender, EventArgs e)
+        {
+            if (_currentProjectIndex == 0) return;
+            _currentProjectIndex--;
+            CurrentProjectInfo();
+        }
+
+        private void BtnFirstProject_Click(object sender, EventArgs e)
+        {         
+            _currentProjectIndex = 0;
+            CurrentProjectInfo();
         }
     }
 }
