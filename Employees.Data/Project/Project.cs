@@ -25,5 +25,10 @@ namespace Employees.Data.Project
             return base.ToString() + (IsActive ? " | Active" : " | Not Active") + (IsFinished ? " | Project finished" : " | Project being worked on") 
                    + $" | Start date: {StartDate:MM/dd/yyyy}"  + $" | End date: {EndDate:MM/dd/yyyy}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj) && obj.ToString() == ToString();
+        }
     }
 }

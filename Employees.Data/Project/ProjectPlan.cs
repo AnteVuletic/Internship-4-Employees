@@ -17,5 +17,10 @@ namespace Employees.Data.Project
         {
             return $"Name: {Name}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj) && obj.ToString() == ToString();
+        }
     }
 }

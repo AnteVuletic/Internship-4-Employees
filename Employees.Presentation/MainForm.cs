@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Data.Project;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
 
@@ -26,6 +27,13 @@ namespace Employees.Presentation
                 new DateTime(1996, 3, 1), Position.Programmer));
             _mainRepository.DataEmployees.AddEmployee(new Employee("Anica", "Antić", "1673192",
                 new DateTime(1997, 10, 1), Position.Accountant, "Ane"));
+            _mainRepository.DataProjects.AddProject(new ProjectPlan("Cool project"));
+            _mainRepository.DataProjects.AddProject(new Project("Very cool project", new DateTime(2018, 10, 10),
+                DateTime.Now, true, false));
+            _mainRepository.DataProjects.AddProject(new Project("Dump cool project", new DateTime(2018, 6, 15),
+                new DateTime(2019, 5, 6), false, true));
+            _mainRepository.DataProjects.AddProject(new Project("Somewhat cool project", new DateTime(2018, 7, 13),
+                new DateTime(2019, 6, 5), false, false));
         }
 
         private void BtnManageEmployees_Click(object sender, EventArgs e)

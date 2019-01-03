@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
 
@@ -15,8 +16,8 @@ namespace Employees.Presentation.ManageEmployees
 {
     public partial class AddEmployee : Form
     {
-        private MainRepository _mainRepository;
-        private Employee _mockEmployee = new Employee("","","",DateTime.Now,Position.Accountant,"");
+        private readonly MainRepository _mainRepository;
+        private readonly Employee _mockEmployee = new Employee("","","",DateTime.Now,Position.Accountant,"");
         public AddEmployee(MainRepository mainRepository)
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Employees.Presentation.ManageEmployees
             SecondNameLabel.Hide();
             SecondNameTextBox.Hide();
             FillDropDownPosition();
+            FillListOfProjects();
         }
 
         private void FillDropDownPosition()
@@ -42,11 +44,6 @@ namespace Employees.Presentation.ManageEmployees
                 ListProjects.Items.Add(project);
             }
         }
-        private void AddEmployee_Load(object sender, EventArgs e)
-        {
-           
-        }
-
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
             _mockEmployee.Forename = NameTextBox.Text;
@@ -86,14 +83,14 @@ namespace Employees.Presentation.ManageEmployees
             _mockEmployee.Position = (Position)Enum.Parse(typeof(Position), ComboPosition.Text);
         }
 
-        private void ListProjects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             _mainRepository.DataEmployees.AddEmployee(_mockEmployee);
+            foreach (var project in ListProjects.SelectedItems)
+            {
+                _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee,_mainRepository.DataProjects.GetAllProjects().Find(projectInQuestion => project.Equals(projectInQuestion))));
+            }
             Close();
         }
 

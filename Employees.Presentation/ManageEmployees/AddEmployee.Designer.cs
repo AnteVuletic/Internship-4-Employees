@@ -131,11 +131,11 @@
             this.ListProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.ListProjects.ForeColor = System.Drawing.SystemColors.Desktop;
             this.ListProjects.FormattingEnabled = true;
+            this.ListProjects.HorizontalScrollbar = true;
             this.ListProjects.Location = new System.Drawing.Point(12, 320);
             this.ListProjects.Name = "ListProjects";
             this.ListProjects.Size = new System.Drawing.Size(304, 109);
             this.ListProjects.TabIndex = 11;
-            this.ListProjects.SelectedIndexChanged += new System.EventHandler(this.ListProjects_SelectedIndexChanged);
             // 
             // BtnSave
             // 
@@ -240,7 +240,6 @@
             this.Controls.Add(this.label1);
             this.Name = "AddEmployee";
             this.Text = "AddEmployee";
-            this.Load += new System.EventHandler(this.AddEmployee_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
