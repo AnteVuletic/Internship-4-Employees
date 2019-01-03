@@ -189,7 +189,10 @@ namespace Employees.Presentation.ManageProjects
         private void RealCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
+            {
+                RealCheckbox.Checked = true;
                 return;
+            }
             _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] =
                 new Project(_currentProjectPlan.Name, DateTime.Now, DateTime.Now, true, false)
                 {

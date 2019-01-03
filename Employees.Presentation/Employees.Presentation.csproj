@@ -120,6 +120,12 @@
     <Compile Include="View\ViewProjects.Designer.cs">
       <DependentUpon>ViewProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warnings\WarningTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warnings\WarningTemplate.Designer.cs">
+      <DependentUpon>WarningTemplate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ViewProjects.resx">
       <DependentUpon>ViewProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warnings\WarningTemplate.resx">
+      <DependentUpon>WarningTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
