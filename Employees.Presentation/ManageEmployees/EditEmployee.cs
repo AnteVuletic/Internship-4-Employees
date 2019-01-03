@@ -9,8 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Data.Project;
+using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
+using Employees.Presentation.ManageEmployees.Popouts;
 
 namespace Employees.Presentation.ManageEmployees
 {
@@ -34,6 +37,17 @@ namespace Employees.Presentation.ManageEmployees
                 ComboPosition.Items.Add(positionName);                    
             }
         }
+
+        private void FillEmployeeList()
+        {
+            ListProjects.Items.Clear();
+            foreach (var project in _mainRepository.DataProjects.GetAllProjects())
+            {
+                ListProjects.Items.Add(project);
+                if(_mainRepository.RelationEmployeeProject.Contains(new RelationEmployeeProject(_currentEmployee,project)))
+                    ListProjects.SetItemChecked(ListProjects.Items.IndexOf(project),true);
+            }
+        }
         private void RefreshEmployee()
         {
             _currentEmployee = _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex];
@@ -43,7 +57,8 @@ namespace Employees.Presentation.ManageEmployees
             OibTextBox.Text = _currentEmployee.Oib;
             DateTimeBirthday.Value = _currentEmployee.DateBirth;
             ComboPosition.Text = Enum.GetName(typeof(Position), _currentEmployee.Position);
-            CurrentPageTextBox.Text = $@"{_currentEmployeeIndex+1} / {_mainRepository.DataEmployees.GetAllEmployees().Count()}";
+            CurrentPageTextBox.Text = $@"{_currentEmployeeIndex+1} / {_mainRepository.DataEmployees.GetAllEmployees().Count}";
+            FillEmployeeList();
         }
 
 
@@ -96,8 +111,37 @@ namespace Employees.Presentation.ManageEmployees
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            _mainRepository.DataEmployees.GetAllEmployees().RemoveAt(_currentEmployeeIndex);
-            _mainRepository.DataEmployees.GetAllEmployees().Add(_currentEmployee);
+            var tmpRelationEmployeeProjectList = new List<RelationEmployeeProject>();
+            _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex] =
+                new Employee(_currentEmployee.Forename, _currentEmployee.Oib, _currentEmployee.Oib,
+                    _currentEmployee.DateBirth, _currentEmployee.Position, _currentEmployee.SecondForename);
+            foreach (var relationEmployeeProject in _mainRepository.RelationEmployeeProject)
+            {
+                if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
+                    tmpRelationEmployeeProjectList.Add(relationEmployeeProject);
+            }
+
+            foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
+            {
+                if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
+                    _mainRepository.RelationEmployeeProject.Remove(relationEmployeeProject);
+            }
+            foreach (var checkedItem in ListProjects.CheckedItems)
+            {
+                var checkedItemAppeared = false;
+                foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
+                {
+                    if (_mainRepository.DataProjects.GetProjectById(relationEmployeeProject.ProjectGuid).ToString() !=
+                        checkedItem.ToString()) continue;
+                    checkedItemAppeared = true;
+                    _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
+                }
+                if (checkedItemAppeared) continue;
+                var projectRefrence = _mainRepository.DataProjects.GetAllProjects().Find(
+                    projectIterator => projectIterator.ToString() == checkedItem.ToString());
+                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_currentEmployee,(Project)projectRefrence);
+                popoutEmployeeTime.ShowDialog();
+            }
             RefreshEmployee();
         }
 

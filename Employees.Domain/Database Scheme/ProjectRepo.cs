@@ -28,6 +28,18 @@ namespace Employees.Domain.Database_Scheme
             return false;
         }
 
+        public ProjectPlan GetProjectById(Guid argId)
+        {
+            foreach (var projectPlan in ProjectList)
+            {
+                if (projectPlan.Id == argId)
+                {
+                    return projectPlan;
+                }
+            }
+
+            return null;
+        }
         public bool RemoveProjectById(Guid passedGuid)
         {
             foreach (var project in ProjectList)

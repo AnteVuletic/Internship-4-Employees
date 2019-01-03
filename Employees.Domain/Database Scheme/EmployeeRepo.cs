@@ -26,6 +26,16 @@ namespace Employees.Domain.Database_Scheme
             return false;
         }
 
+        public Employee GetByOib(string argOib)
+        {
+            foreach (var employee in EmployeeList)
+            {
+                if (employee.Oib == argOib)
+                    return employee;
+            }
+
+            return null;
+        }
         public List<Employee> GetAllEmployees() => EmployeeList;
     }
 }

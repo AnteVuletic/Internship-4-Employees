@@ -8,9 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
+using Employees.Presentation.ManageEmployees.Popouts;
 
 namespace Employees.Presentation.ManageEmployees
 {
@@ -87,9 +89,12 @@ namespace Employees.Presentation.ManageEmployees
         private void BtnSave_Click(object sender, EventArgs e)
         {
             _mainRepository.DataEmployees.AddEmployee(_mockEmployee);
-            foreach (var project in ListProjects.SelectedItems)
+            foreach (var project in ListProjects.CheckedItems)
             {
-                _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee,_mainRepository.DataProjects.GetAllProjects().Find(projectInQuestion => project.Equals(projectInQuestion))));
+                var projectRef = _mainRepository.DataProjects.GetAllProjects()
+                    .Find(projectInQuestion => project.Equals(projectInQuestion));
+                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_mockEmployee,(Project)projectRef);
+                popoutEmployeeTime.ShowDialog();
             }
             Close();
         }
