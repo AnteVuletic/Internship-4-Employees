@@ -147,6 +147,9 @@
     <EmbeddedResource Include="ManageProjects\ManageProjects.resx">
       <DependentUpon>ManageProjects.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageProjects\RemoveProject.resx">
+      <DependentUpon>RemoveProject.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

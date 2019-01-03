@@ -18,7 +18,7 @@ namespace Employees.Presentation.ManageProjects
 {
     public partial class EditProject : Form
     {
-        private readonly MainRepository _mainRepository;
+        private MainRepository _mainRepository;
         private Project _currentProject;
         private ProjectPlan _currentProjectPlan;
         private int _currentProjectIndex = 0;
@@ -159,14 +159,6 @@ namespace Employees.Presentation.ManageProjects
             Close();
         }
 
-        private void RealCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
-                return;
-            _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = new Project(_currentProjectPlan.Name, DateTime.Now, DateTime.Now,true,false);
-            CurrentProjectInfo();
-        }
-
         private void BtnLastProject_Click(object sender, EventArgs e)
         {
             if (_currentProjectIndex == _mainRepository.DataProjects.GetAllProjects().Count - 1) return;
@@ -191,6 +183,19 @@ namespace Employees.Presentation.ManageProjects
         private void BtnFirstProject_Click(object sender, EventArgs e)
         {         
             _currentProjectIndex = 0;
+            CurrentProjectInfo();
+        }
+
+        private void RealCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
+                return;
+            _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] =
+                new Project(_currentProjectPlan.Name, DateTime.Now, DateTime.Now, true, false)
+                {
+                    Id = _currentProjectPlan.Id
+                };
+            _currentProjectPlan = null;
             CurrentProjectInfo();
         }
     }

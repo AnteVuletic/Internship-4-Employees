@@ -194,6 +194,7 @@
             this.RealCheckbox.TabIndex = 17;
             this.RealCheckbox.Text = "Real project";
             this.RealCheckbox.UseVisualStyleBackColor = true;
+            this.RealCheckbox.CheckedChanged += new System.EventHandler(this.RealCheckbox_CheckedChanged);
             // 
             // SelectedEmployeeControlLabel
             // 
