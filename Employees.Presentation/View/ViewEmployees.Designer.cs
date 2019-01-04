@@ -44,6 +44,9 @@ namespace Employees.Presentation.View
             this.EmployeeListView.Columns.Add(new ColumnHeader("Surname").Text = "Surname");
             this.EmployeeListView.Columns.Add(new ColumnHeader("Position").Text = "Position");
             this.EmployeeListView.Columns.Add(new ColumnHeader("Birthday").Text = "Birthday");
+            this.EmployeeListView.Columns.Add(new ColumnHeader("Hours").Text = "Weekly hours");
+            this.EmployeeListView.Columns.Add(new ColumnHeader("Finished").Text = "Finished projects");
+            this.EmployeeListView.Columns.Add(new ColumnHeader("Active").Text = "Active projects");
 
         // 
         // EmployeeListView

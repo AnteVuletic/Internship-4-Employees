@@ -23,20 +23,26 @@ namespace Employees.Presentation.View
 
         public void FillEmployeeList()
         {
-            var alternateRows = true;
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())
             {
-                var oneRow = new ListViewItem(employee.Oib)
-                {
-                    BackColor = alternateRows ? Color.CadetBlue : Color.AliceBlue
-                };
+                var oneRow = new ListViewItem(employee.Oib);
+                var weeklyHours = _mainRepository.GetHoursByEmployee(employee.Oib);
+                if(weeklyHours < 30)
+                    oneRow.BackColor = Color.Yellow;
+                else if (weeklyHours >= 30 && weeklyHours <= 40)
+                    oneRow.BackColor = Color.Green;
+                else
+                    oneRow.BackColor = Color.IndianRed;
                 oneRow.SubItems.Add(employee.Forename);
                 oneRow.SubItems.Add(employee.SecondForename);
                 oneRow.SubItems.Add(employee.Surname);
                 oneRow.SubItems.Add(employee.Position.ToString());
                 oneRow.SubItems.Add(employee.DateBirth.ToString("MM/dd/yyyy"));
+                oneRow.SubItems.Add(weeklyHours.ToString("G"));
+                oneRow.SubItems.Add(_mainRepository.GetNumberFinishedProjectsByEmployee(employee.Oib));
+                oneRow.SubItems.Add(_mainRepository.GetNumberActiveProjectsByEmployee(employee.Oib));
                 EmployeeListView.Items.Add(oneRow);
-                alternateRows = !alternateRows;
+                
             }
         }
 
