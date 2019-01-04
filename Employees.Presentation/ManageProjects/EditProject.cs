@@ -212,14 +212,13 @@ namespace Employees.Presentation.ManageProjects
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            _mockProject.Id = _currentProjectPlan.Id;
-            if (_currentProjectPlan is Project)
+            if (_mockProject == null)
             {
-                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProject;
+                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProjectPlan;
             }
             else
             {
-                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = (ProjectPlan)_mockProject;
+                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProject;
             }
             foreach (var checkedItem in EmployeeCheckedList.CheckedItems)
             {

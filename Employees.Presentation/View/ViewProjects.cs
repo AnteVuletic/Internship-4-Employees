@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data.Project;
 using Employees.Domain.Repository;
+using Employees.Infrastructure.Enums;
 
 namespace Employees.Presentation.View
 {
@@ -26,11 +27,44 @@ namespace Employees.Presentation.View
         {
             foreach (var project in _mainRepository.DataProjects.GetAllProjects())
             {
-                if (project is Project project1)
-                    ProjectList.Items.Add(project1.ToString());
+
+                var projectGroup = new ListViewItem(project.Name);
+                if (project is Project realProject)
+                {
+                    projectGroup.SubItems.Add(realProject.StartDate.ToString("MM/dd/yyyy") + " - " +
+                                              realProject.EndDate.ToString("MM/dd/yyyy"));
+                }
                 else
-                    ProjectList.Items.Add(project.ToString());
+                {
+                    projectGroup.SubItems.Add("-");
+                }
+
+                foreach (var position in Enum.GetNames(typeof(Position)))
+                    {
+                        var stringForStaging = position+ ": " + Environment.NewLine;
+                        var ifChanged = false;
+                        foreach (var relationEmployeeProject in _mainRepository.RelationEmployeeProject.FindAll(
+                            relation => relation.ProjectGuid == project.Id))
+                        {
+                            var employee = _mainRepository.DataEmployees.GetByOib(relationEmployeeProject.EmployeeOib);
+                            if (employee.Position.ToString() != position) continue;
+                            ifChanged = true;
+                            stringForStaging += $" {Environment.NewLine} {employee.Forename} {employee.Surname} {relationEmployeeProject.TimeOnProjectWeek}";
+                        }
+
+                        if (ifChanged)
+                        {
+                            projectGroup.SubItems.Add(stringForStaging);
+                        }
+                        else
+                        {
+                            projectGroup.SubItems.Add(" ");
+                        }
+                    }
+                    ProjectList.Items.Add(projectGroup);
+               
             }
         }
+
     }
 }
