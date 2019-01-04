@@ -18,10 +18,10 @@ namespace Employees.Presentation.ManageEmployees.Popouts
     {
         private MainRepository _mainRepository;
         private readonly Employee _employee;
-        private readonly Project _project;
+        private readonly ProjectPlan _project;
         private int _tmpTimeWeek = 0;
         private bool _flagForEdit = false;
-        public EmployeeTime(MainRepository mainRepository, Employee employee, Project project)
+        public EmployeeTime(MainRepository mainRepository, Employee employee, ProjectPlan project)
         {
             InitializeComponent();
             _mainRepository = mainRepository;
@@ -30,7 +30,7 @@ namespace Employees.Presentation.ManageEmployees.Popouts
             RefreshEmployeeInfo();
         }
 
-        public EmployeeTime(MainRepository mainRepository, Employee employee, Project project, int tmpTimeWeek)
+        public EmployeeTime(MainRepository mainRepository, Employee employee, ProjectPlan project, int tmpTimeWeek)
         {
             InitializeComponent();
             _mainRepository = mainRepository;
@@ -45,7 +45,7 @@ namespace Employees.Presentation.ManageEmployees.Popouts
             EmployeInfoTextBox.Text = $@"{_employee.Forename} {_employee.Surname} {_employee.Position.ToString()}";
             ProjectNameTextbox.Text = _project.Name;
             if (_flagForEdit)
-                TimeEmployeeTextbox.Text = _tmpTimeWeek.ToString();
+                TimeEmployeeTextbox.Text = _tmpTimeWeek.ToString("G");
         }
 
         private void TimeEmployeeTextbox_TextChanged(object sender, EventArgs e)

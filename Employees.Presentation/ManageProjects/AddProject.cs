@@ -43,8 +43,6 @@ namespace Employees.Presentation.ManageProjects
             {
                 ProjectStartLabel.Show();
                 ProjectEndLabel.Show();
-                EmployeeLabel.Show();
-                EmployeeCheckedList.Show();
                 StartDatePicker.Show();
                 EndDatePicker.Show();
                 EndDatePicker.Enabled = false;
@@ -55,8 +53,6 @@ namespace Employees.Presentation.ManageProjects
             {
                 ProjectStartLabel.Hide();
                 ProjectEndLabel.Hide();
-                EmployeeLabel.Hide();
-                EmployeeCheckedList.Hide();
                 StartDatePicker.Hide();
                 EndDatePicker.Hide();
                 IsActiveCheckBox.Hide();
@@ -90,7 +86,14 @@ namespace Employees.Presentation.ManageProjects
         private void BtnSave_Click(object sender, EventArgs e)
         {
             if (!RealCheckbox.Checked)
+            {
                 _mainRepository.DataProjects.AddProject(_projectPlan);
+                foreach (var selectedEmployee in _selectedEmployees)
+                {
+                    var popoutEmployeeSelectedWeeklyTime = new EmployeeTime(_mainRepository, selectedEmployee, _projectPlan);
+                    popoutEmployeeSelectedWeeklyTime.ShowDialog();
+                }
+            }
             else
             {
                 _mainRepository.DataProjects.AddProject(_project);

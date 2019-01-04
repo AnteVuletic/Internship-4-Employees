@@ -19,10 +19,9 @@ namespace Employees.Presentation.ManageProjects
     public partial class EditProject : Form
     {
         private MainRepository _mainRepository;
-        private Project _currentProject;
         private ProjectPlan _currentProjectPlan;
         private int _currentProjectIndex = 0;
-        private readonly List<Employee> _selectedEmployees = new List<Employee>();
+        private List<RelationEmployeeProject> _employeesOnProject = new List<RelationEmployeeProject>();
         public EditProject(MainRepository mainRepository)
         {
             InitializeComponent();
@@ -31,30 +30,29 @@ namespace Employees.Presentation.ManageProjects
         }
         public void FillEmployeeList()
         {
-            _selectedEmployees.Clear();
             EmployeeCheckedList.Items.Clear();
+            foreach (var relationEmployeeProject in _mainRepository.RelationEmployeeProject.FindAll(relationInQuestion => relationInQuestion.ProjectGuid == _currentProjectPlan.Id))
+            {
+                _employeesOnProject.Add(relationEmployeeProject);
+            }
+
+            foreach (var relationEmployeeProject in _employeesOnProject)
+            {
+                _mainRepository.RelationEmployeeProject.Remove(relationEmployeeProject);
+            }
+
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())
             {
                 EmployeeCheckedList.Items.Add(employee);
-                if (!_mainRepository.RelationEmployeeProject.Contains(
-                    new RelationEmployeeProject(employee, _currentProject))) continue;
-                EmployeeCheckedList.SetItemChecked(EmployeeCheckedList.Items.IndexOf(employee), true);
-                _selectedEmployees.Add(employee);
+                if(_employeesOnProject.Contains(new RelationEmployeeProject(employee,_currentProjectPlan)))
+                    EmployeeCheckedList.SetItemChecked(EmployeeCheckedList.Items.IndexOf(employee),true);
             }
         }
-        
-        public void RefreshSelectedEmployeeList()
-        {
-            SelectedEmployeeList.Clear();
-            foreach (var checkedEmployee in _selectedEmployees)
-            {
-                SelectedEmployeeList.Items.Add(checkedEmployee.ToString());
-            }
-        }
+
         public void GetCurrentProject()
         {
             if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
-                _currentProject = (Project) _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex];
+                _currentProjectPlan = (Project) _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex];
             else
                 _currentProjectPlan = _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex];
         }
@@ -67,29 +65,20 @@ namespace Employees.Presentation.ManageProjects
                 RealCheckbox.Checked = false;
                 ProjectStartLabel.Hide();
                 ProjectEndLabel.Hide();
-                EmployeeLabel.Hide();
-                SelectedEmployeeControlLabel.Hide();
-                EmployeeCheckedList.Hide();
-                SelectedEmployeeList.Hide();
                 StartDatePicker.Hide();
                 EndDatePicker.Hide();
                 IsActiveCheckBox.Hide();
-
+                FillEmployeeList();
             }
             else
             {
-                NameTextBox.Text = _currentProject.Name;
+                NameTextBox.Text = _currentProjectPlan.Name;
                 RealCheckbox.Checked = true;
-                StartDatePicker.Value = _currentProject.StartDate;
-                EndDatePicker.Value = _currentProject.EndDate;
+                StartDatePicker.Value = ((Project) _currentProjectPlan).StartDate;
+                EndDatePicker.Value = ((Project)_currentProjectPlan).EndDate;
                 FillEmployeeList();
-                RefreshSelectedEmployeeList();
                 ProjectStartLabel.Show();
                 ProjectEndLabel.Show();
-                EmployeeLabel.Show();
-                SelectedEmployeeControlLabel.Show();
-                EmployeeCheckedList.Show();
-                SelectedEmployeeList.Show();
                 StartDatePicker.Show();
                 EndDatePicker.Show();
                 IsActiveCheckBox.Show();
@@ -99,64 +88,26 @@ namespace Employees.Presentation.ManageProjects
                 $@"{(_currentProjectIndex+1).ToString()} / {_mainRepository.DataProjects.GetAllProjects().Count}";
         }
 
-        private void EmployeeCheckedList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            EmployeeCheckedList.SetItemChecked(EmployeeCheckedList.SelectedIndex, true);
-            var employeeSelected = EmployeeCheckedList.SelectedItem as Employee;
-            foreach (var employee in _selectedEmployees)
-            {
-                if (!employee.Equals(employeeSelected)) continue;
-                EmployeeCheckedList.SetItemChecked(EmployeeCheckedList.SelectedIndex, false);
-                _selectedEmployees.Remove(employee);
-                _mainRepository.RelationEmployeeProject.Remove(new RelationEmployeeProject(employee, _currentProject));
-                RefreshSelectedEmployeeList();
-                return;
-            }
-            _selectedEmployees.Add(employeeSelected);
-            RefreshSelectedEmployeeList();
-        }
-
-        private void SelectedEmployeeList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (SelectedEmployeeList.SelectedItems.Count == 0) return;
-            var itemsSelected = SelectedEmployeeList.SelectedIndices[0];
-            var popoutItemSelected = new EmployeeTime(_mainRepository, _selectedEmployees[itemsSelected], _currentProject,
-                _mainRepository
-                    .RelationEmployeeProject[
-                        _mainRepository.GetIndexOfRelation(new RelationEmployeeProject(_selectedEmployees[itemsSelected], _currentProject))]
-                    .TimeOnProjectWeek);
-            popoutItemSelected.ShowDialog();
-            SelectedEmployeeList.SelectedItems.Clear();        
-        }
-
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
-                _currentProject.Name = NameTextBox.Text;
-            else
                 _currentProjectPlan.Name = NameTextBox.Text;
         }
 
         private void StartDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            _currentProject.StartDate = StartDatePicker.Value;
+            ((Project)_currentProjectPlan).StartDate = StartDatePicker.Value;
             EndDatePicker.Enabled = true;
             EndDatePicker.MinDate = StartDatePicker.Value;
         }
 
         private void EndDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            _currentProject.EndDate = EndDatePicker.Value;
+            ((Project)_currentProjectPlan).EndDate = EndDatePicker.Value;
         }
 
         private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _currentProject.IsActive = IsActiveCheckBox.Checked;
-        }
-
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            Close();
+            ((Project)_currentProjectPlan).IsActive = IsActiveCheckBox.Checked;
         }
 
         private void BtnLastProject_Click(object sender, EventArgs e)
@@ -200,6 +151,31 @@ namespace Employees.Presentation.ManageProjects
                 };
             _currentProjectPlan = null;
             CurrentProjectInfo();
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            foreach (var checkedItem in EmployeeCheckedList.CheckedItems)
+            {
+                var checkedEmployee = _mainRepository.DataEmployees.GetAllEmployees()
+                    .Find(employee => employee.Equals(checkedItem));
+                EmployeeTime popoutEmployeeTime;
+                if (_employeesOnProject.Contains(new RelationEmployeeProject(checkedEmployee, _currentProjectPlan)))
+                {
+                    popoutEmployeeTime = new EmployeeTime(_mainRepository,checkedEmployee,_currentProjectPlan
+                        ,_employeesOnProject.Find(relation => relation.EmployeeOib == checkedEmployee.Oib).TimeOnProjectWeek);
+                }
+                else
+                {
+                    popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan);
+                }
+                popoutEmployeeTime.ShowDialog();
+            }
+            Close();
+        }
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

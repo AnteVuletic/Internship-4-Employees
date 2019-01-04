@@ -93,7 +93,7 @@ namespace Employees.Presentation.ManageEmployees
             {
                 var projectRef = _mainRepository.DataProjects.GetAllProjects()
                     .Find(projectInQuestion => project.Equals(projectInQuestion));
-                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_mockEmployee,(Project)projectRef);
+                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_mockEmployee,projectRef);
                 popoutEmployeeTime.ShowDialog();
             }
             Close();

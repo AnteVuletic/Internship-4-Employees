@@ -66,7 +66,8 @@ namespace Employees.Domain.Repository
                 if (!RelationEmployeeProject[relationIndex].Equals(argRelation)) continue;
                 return relationIndex;
             }
-            throw new Exception("Relation not found");
+
+            return -1;
         }
     }
 }

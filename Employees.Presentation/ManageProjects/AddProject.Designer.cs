@@ -115,7 +115,6 @@
             this.EmployeeLabel.Size = new System.Drawing.Size(141, 20);
             this.EmployeeLabel.TabIndex = 6;
             this.EmployeeLabel.Text = "List of employees";
-            this.EmployeeLabel.Visible = false;
             // 
             // EmployeeCheckedList
             // 
@@ -128,7 +127,6 @@
             this.EmployeeCheckedList.Name = "EmployeeCheckedList";
             this.EmployeeCheckedList.Size = new System.Drawing.Size(322, 184);
             this.EmployeeCheckedList.TabIndex = 7;
-            this.EmployeeCheckedList.Visible = false;
             this.EmployeeCheckedList.SelectedIndexChanged += new System.EventHandler(this.EmployeeCheckedList_SelectedIndexChanged);
             // 
             // StartDatePicker

@@ -139,7 +139,7 @@ namespace Employees.Presentation.ManageEmployees
                 if (checkedItemAppeared) continue;
                 var projectRefrence = _mainRepository.DataProjects.GetAllProjects().Find(
                     projectIterator => projectIterator.ToString() == checkedItem.ToString());
-                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_currentEmployee,(Project)projectRefrence);
+                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_currentEmployee,projectRefrence);
                 popoutEmployeeTime.ShowDialog();
             }
             RefreshEmployee();
