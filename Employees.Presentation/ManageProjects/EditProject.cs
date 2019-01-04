@@ -21,6 +21,8 @@ namespace Employees.Presentation.ManageProjects
         private MainRepository _mainRepository;
         private ProjectPlan _currentProjectPlan;
         private int _currentProjectIndex = 0;
+        private ProjectPlan _mockProjectPlan;
+        private Project _mockProject;
         private List<RelationEmployeeProject> _employeesOnProject = new List<RelationEmployeeProject>();
         public EditProject(MainRepository mainRepository)
         {
@@ -58,11 +60,18 @@ namespace Employees.Presentation.ManageProjects
         }
         public void CurrentProjectInfo()
         {
+            _mockProject = null;
+            _mockProjectPlan = null;
             GetCurrentProject();
-            if (!(_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project))
+            if (!(_currentProjectPlan is Project))
             {
-                NameTextBox.Text = _currentProjectPlan.Name;
+                _mockProjectPlan = new ProjectPlan(_currentProjectPlan.Name)
+                {
+                    Id = _currentProjectPlan.Id
+                };
+                NameTextBox.Text = _mockProjectPlan.Name;
                 RealCheckbox.Checked = false;
+                RealCheckbox.CheckState = CheckState.Unchecked;
                 ProjectStartLabel.Hide();
                 ProjectEndLabel.Hide();
                 StartDatePicker.Hide();
@@ -72,10 +81,17 @@ namespace Employees.Presentation.ManageProjects
             }
             else
             {
-                NameTextBox.Text = _currentProjectPlan.Name;
+                _mockProject = new Project(_currentProjectPlan.Name, ((Project)_currentProjectPlan).StartDate,
+                    ((Project)_currentProjectPlan).EndDate, ((Project)_currentProjectPlan).IsActive,
+                    ((Project)_currentProjectPlan).IsFinished)
+                {
+                    Id = _currentProjectPlan.Id
+                };            
+                NameTextBox.Text = _mockProject.Name;
                 RealCheckbox.Checked = true;
-                StartDatePicker.Value = ((Project) _currentProjectPlan).StartDate;
-                EndDatePicker.Value = ((Project)_currentProjectPlan).EndDate;
+                RealCheckbox.CheckState = CheckState.Checked;
+                StartDatePicker.Value = _mockProject.StartDate;
+                EndDatePicker.Value = _mockProject.EndDate;
                 FillEmployeeList();
                 ProjectStartLabel.Show();
                 ProjectEndLabel.Show();
@@ -88,26 +104,56 @@ namespace Employees.Presentation.ManageProjects
                 $@"{(_currentProjectIndex+1).ToString()} / {_mainRepository.DataProjects.GetAllProjects().Count}";
         }
 
+        public void RefreshProjectInfo()
+        {
+            if (_mockProjectPlan != null)
+            {
+                NameTextBox.Text = _mockProjectPlan.Name;
+                RealCheckbox.Checked = false;
+                ProjectStartLabel.Hide();
+                ProjectEndLabel.Hide();
+                StartDatePicker.Hide();
+                EndDatePicker.Hide();
+                IsActiveCheckBox.Hide();
+                FillEmployeeList();
+            }
+            else
+            {               
+                NameTextBox.Text = _mockProject.Name;
+                RealCheckbox.Checked = true;
+                StartDatePicker.Value = _mockProject.StartDate;
+                EndDatePicker.Value = _mockProject.EndDate;
+                FillEmployeeList();
+                ProjectStartLabel.Show();
+                ProjectEndLabel.Show();
+                StartDatePicker.Show();
+                EndDatePicker.Show();
+                IsActiveCheckBox.Show();
+            }
+        }
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-                _currentProjectPlan.Name = NameTextBox.Text;
+            if (_mockProject != null)
+                _mockProject.Name = NameTextBox.Text;
+            else
+                _mockProjectPlan.Name = NameTextBox.Text;
         }
 
         private void StartDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            ((Project)_currentProjectPlan).StartDate = StartDatePicker.Value;
+            _mockProject.StartDate = StartDatePicker.Value;
             EndDatePicker.Enabled = true;
             EndDatePicker.MinDate = StartDatePicker.Value;
         }
 
         private void EndDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            ((Project)_currentProjectPlan).EndDate = EndDatePicker.Value;
+            _mockProject.EndDate = EndDatePicker.Value;
         }
 
         private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            ((Project)_currentProjectPlan).IsActive = IsActiveCheckBox.Checked;
+            _mockProject.IsActive = IsActiveCheckBox.Checked;
         }
 
         private void BtnLastProject_Click(object sender, EventArgs e)
@@ -137,24 +183,44 @@ namespace Employees.Presentation.ManageProjects
             CurrentProjectInfo();
         }
 
-        private void RealCheckbox_CheckedChanged(object sender, EventArgs e)
+        private void RealCheckbox_Clicked(object sender, EventArgs e)
         {
-            if (_mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] is Project)
+            RealCheckbox.Checked = !RealCheckbox.Checked;
+            if (RealCheckbox.Checked)
             {
-                RealCheckbox.Checked = true;
+                _mockProjectPlan = new ProjectPlan(_mockProject.Name)
+                {
+                    Id = _mockProject.Id
+                };
+                _mockProject = null;
+                RefreshProjectInfo();
                 return;
             }
-            _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] =
-                new Project(_currentProjectPlan.Name, DateTime.Now, DateTime.Now, true, false)
+            _mockProject =
+                new Project(_mockProjectPlan.Name, DateTime.Now, DateTime.Now, true, false)
                 {
-                    Id = _currentProjectPlan.Id
+                    Id = _mockProjectPlan.Id
                 };
-            _currentProjectPlan = null;
-            CurrentProjectInfo();
+            _mockProjectPlan = null;
+            RefreshProjectInfo();
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+
+            Close();
+        }
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            _mockProject.Id = _currentProjectPlan.Id;
+            if (_currentProjectPlan is Project)
+            {
+                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProject;
+            }
+            else
+            {
+                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = (ProjectPlan)_mockProject;
+            }
             foreach (var checkedItem in EmployeeCheckedList.CheckedItems)
             {
                 var checkedEmployee = _mainRepository.DataEmployees.GetAllEmployees()
@@ -162,8 +228,8 @@ namespace Employees.Presentation.ManageProjects
                 EmployeeTime popoutEmployeeTime;
                 if (_employeesOnProject.Contains(new RelationEmployeeProject(checkedEmployee, _currentProjectPlan)))
                 {
-                    popoutEmployeeTime = new EmployeeTime(_mainRepository,checkedEmployee,_currentProjectPlan
-                        ,_employeesOnProject.Find(relation => relation.EmployeeOib == checkedEmployee.Oib).TimeOnProjectWeek);
+                    popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan
+                        , _employeesOnProject.Find(relation => relation.EmployeeOib == checkedEmployee.Oib).TimeOnProjectWeek);
                 }
                 else
                 {
@@ -171,10 +237,6 @@ namespace Employees.Presentation.ManageProjects
                 }
                 popoutEmployeeTime.ShowDialog();
             }
-            Close();
-        }
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
             Close();
         }
     }
