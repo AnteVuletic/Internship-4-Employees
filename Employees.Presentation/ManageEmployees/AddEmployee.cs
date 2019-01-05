@@ -29,6 +29,8 @@ namespace Employees.Presentation.ManageEmployees
             InitializeComponent();
             _mainRepository = mainRepository;
             DateTimeBirthday.MaxDate = new DateTime(DateTime.Today.Year - 18, DateTime.Today.Month ,DateTime.Today.Day);
+            DateTimeBirthday.Value =
+                new DateTime(DateTime.Today.Year - 18, DateTime.Today.Month, DateTime.Today.Day - 2);
             SecondNameLabel.Hide();
             SecondNameTextBox.Hide();
             FillDropDownPosition();
@@ -109,11 +111,15 @@ namespace Employees.Presentation.ManageEmployees
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+            if (_mainRepository.DataEmployees.GetByOib(_mockEmployee.Oib) != null)
+            {
+                OibTextBox.BackColor = Color.IndianRed;
+            }
             if (CheckSave.CheckForm(this))
             {
                 _mockEmployee.Forename = NameTextBox.Text;
                 _mockEmployee.SecondForename = SecondNameTextBox.Text;
-                _mockEmployee.Surname = SecondNameTextBox.Text;
+                _mockEmployee.Surname = SurnameTextBox.Text;
                 _mockEmployee.Oib = OibTextBox.Text;
                 _mainRepository.DataEmployees.AddEmployee(_mockEmployee);
                 foreach (var project in ListProjects.CheckedItems)

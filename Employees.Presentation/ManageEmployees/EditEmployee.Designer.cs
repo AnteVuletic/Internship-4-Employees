@@ -81,7 +81,7 @@ namespace Employees.Presentation.ManageEmployees
             this.OibTextBox.Name = "OibTextBox";
             this.OibTextBox.Size = new System.Drawing.Size(200, 20);
             this.OibTextBox.TabIndex = 34;
-            this.OibTextBox.TextChanged += new System.EventHandler(this.OibTextBox_TextChanged);
+            this.OibTextBox.KeyPress += new KeyPressEventHandler(this.OibTextBox_KeyPress);
             // 
             // SurnameTextBox
             // 

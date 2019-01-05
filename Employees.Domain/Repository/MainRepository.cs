@@ -69,5 +69,16 @@ namespace Employees.Domain.Repository
 
             return -1;
         }
+        public int GetNumberOfRelationsOfProject(Guid projectId)
+        {
+            var counterOfProjects = 0;
+            foreach (var relationEmployeeProject in RelationEmployeeProject)
+            {
+                if (!(relationEmployeeProject.ProjectGuid == projectId)) continue;
+                counterOfProjects++;
+            }
+
+            return counterOfProjects;
+        }
     }
 }

@@ -15,6 +15,7 @@ using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
 using Employees.Infrastructure.Extension;
 using Employees.Presentation.ManageEmployees.Popouts;
+using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageEmployees
 {
@@ -55,6 +56,7 @@ namespace Employees.Presentation.ManageEmployees
             _currentEmployee = _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex];
             _mockEmployee = new Employee(_currentEmployee.Forename, _currentEmployee.Surname, _currentEmployee.Oib,
                 _currentEmployee.DateBirth, _currentEmployee.Position, _currentEmployee.SecondForename);
+            DateTimeBirthday.MaxDate = new DateTime(DateTime.Today.Year - 18, DateTime.Today.Month, DateTime.Today.Day);
             NameTextBox.Text = _mockEmployee.Forename;
             CheckIfSecondName();
             SurnameTextBox.Text = _mockEmployee.Surname;
@@ -118,40 +120,84 @@ namespace Employees.Presentation.ManageEmployees
             _mockEmployee.Forename = NameTextBox.Text;
             _mockEmployee.SecondForename = SecondNameTextBox.Text;
             _mockEmployee.Surname = SurnameTextBox.Text;
+            _mockEmployee.Oib = OibTextBox.Text;
+            var allOccurencesofOib = _mainRepository.DataEmployees.GetAllEmployees()
+                .FindAll(thisEmployee => thisEmployee.Oib == _mockEmployee.Oib);
+            if (allOccurencesofOib.Count > 1)
+            {
+                OibTextBox.BackColor = Color.IndianRed;
+            }
             var tmpRelationEmployeeProjectList = new List<RelationEmployeeProject>();         
             foreach (var relationEmployeeProject in _mainRepository.RelationEmployeeProject)
             {
                 if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
                     tmpRelationEmployeeProjectList.Add(relationEmployeeProject);
             }
-
+            var isOnlyEmployeeButRemovedFromProject = true;
             foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
             {
                 if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
                     _mainRepository.RelationEmployeeProject.Remove(relationEmployeeProject);
+                if (_mainRepository.GetNumberOfRelationsOfProject(relationEmployeeProject.ProjectGuid) > 1) continue;
+                foreach (var checkedItem in ListProjects.CheckedItems)
+                {
+                    var projectInQuestion =
+                        _mainRepository.DataProjects.GetProjectById(relationEmployeeProject.ProjectGuid);
+                    if (projectInQuestion is Project realProjectInQuestion)
+                    {
+                        if (realProjectInQuestion.ToString() != checkedItem.ToString()) continue;
+                        isOnlyEmployeeButRemovedFromProject = false;
+                    }
+                    else
+                    {
+                        if (projectInQuestion.ToString() != checkedItem.ToString()) continue;
+                        isOnlyEmployeeButRemovedFromProject = false;
+                    }
+                }
+                    
             }
 
-            _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex] = _mockEmployee;
-            foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
+            if (CheckSave.CheckForm(this) || !isOnlyEmployeeButRemovedFromProject)
             {
-                relationEmployeeProject.EmployeeOib = _mockEmployee.Oib;
-            }
-            foreach (var checkedItem in ListProjects.CheckedItems)
-            {
-                var checkedItemAppeared = false;
                 foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
                 {
-                    if (_mainRepository.DataProjects.GetProjectById(relationEmployeeProject.ProjectGuid).ToString() !=
-                        checkedItem.ToString()) continue;
-                    checkedItemAppeared = true;
                     _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
                 }
-                if (checkedItemAppeared) continue;
-                var projectRefrence = _mainRepository.DataProjects.GetAllProjects().Find(
-                    projectIterator => projectIterator.ToString() == checkedItem.ToString());
-                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_currentEmployee,projectRefrence);
-                popoutEmployeeTime.ShowDialog();
+
+                if (isOnlyEmployeeButRemovedFromProject)
+                {
+                    var popoutWindowWarning = new WarningTemplate("Tried to remove only employee on project.");
+                    popoutWindowWarning.ShowDialog();
+                }
             }
+            else
+            {
+                _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex] = _mockEmployee;
+                foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
+                {
+                    relationEmployeeProject.EmployeeOib = _mockEmployee.Oib;
+                }
+
+                foreach (var checkedItem in ListProjects.CheckedItems)
+                {
+                    var checkedItemAppeared = false;
+                    foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
+                    {
+                        if (_mainRepository.DataProjects.GetProjectById(relationEmployeeProject.ProjectGuid)
+                                .ToString() !=
+                            checkedItem.ToString()) continue;
+                        checkedItemAppeared = true;
+                        _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
+                    }
+
+                    if (checkedItemAppeared) continue;
+                    var projectRefrence = _mainRepository.DataProjects.GetAllProjects().Find(
+                        projectIterator => projectIterator.ToString() == checkedItem.ToString());
+                    var popoutEmployeeTime = new EmployeeTime(_mainRepository, _currentEmployee, projectRefrence);
+                    popoutEmployeeTime.ShowDialog();
+                }
+            }
+
             RefreshEmployee();
         }
 
@@ -175,19 +221,23 @@ namespace Employees.Presentation.ManageEmployees
             SecondNameTextBox.Text = "";
             SecondNameTextBox.AppendText(inputName);
         }
-        private void OibTextBox_TextChanged(object sender, EventArgs e)
+        private void OibTextBox_KeyPress(object sender, EventArgs e)
         {
-            _currentEmployee.Oib = OibTextBox.Text;
+            OibTextBox.BackColor = OibExtension.TryOib(out var inputOib, OibTextBox.Text) ? Color.LightGreen
+                : Color.IndianRed;
+            OibTextBox.Text = "";
+            OibTextBox.AppendText(inputOib);
         }
 
         private void DateTimeBirthday_ValueChanged(object sender, EventArgs e)
         {
-            _currentEmployee.DateBirth = DateTimeBirthday.Value;
+            _mockEmployee.DateBirth = DateTimeBirthday.Value;
         }
 
         private void ComboPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _currentEmployee.Position = (Position)Enum.Parse(typeof(Position), ComboPosition.Text);
+            _mockEmployee.Position = (Position)Enum.Parse(typeof(Position), ComboPosition.Text);
+            ComboPosition.BackColor = Color.LightGreen;
         }
 
     }
