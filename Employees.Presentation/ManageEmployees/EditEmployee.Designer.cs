@@ -1,4 +1,6 @@
-﻿namespace Employees.Presentation.ManageEmployees
+﻿using System.Windows.Forms;
+
+namespace Employees.Presentation.ManageEmployees
 {
     partial class EditEmployee
     {
@@ -68,7 +70,7 @@
             this.SecondNameTextBox.Name = "SecondNameTextBox";
             this.SecondNameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SecondNameTextBox.TabIndex = 35;
-            this.SecondNameTextBox.TextChanged += new System.EventHandler(this.SecondNameTextBox_TextChanged);
+            this.SecondNameTextBox.KeyPress += new KeyPressEventHandler(this.SecondNameTextBox_KeyPress);
             // 
             // OibTextBox
             // 
@@ -84,7 +86,7 @@
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SurnameTextBox.TabIndex = 33;
-            this.SurnameTextBox.TextChanged += new System.EventHandler(this.SurnameTextBox_TextChanged);
+            this.SurnameTextBox.KeyPress += new KeyPressEventHandler(this.SurnameTextBox_KeyPress);
             // 
             // NameTextBox
             // 
@@ -92,7 +94,7 @@
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(200, 20);
             this.NameTextBox.TabIndex = 32;
-            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.NameTextBox.KeyPress += new KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
             // CheckBoxSecondName
             // 

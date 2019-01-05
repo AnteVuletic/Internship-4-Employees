@@ -55,8 +55,6 @@ namespace Employees.Presentation.ManageEmployees
                 NameTextBox.Text = "";
                 NameTextBox.AppendText(inputName);
                 NameTextBox.BackColor = Color.LightGreen;
-                _mockEmployee.Forename = inputName;
-                
             }
             else
             {
@@ -74,7 +72,6 @@ namespace Employees.Presentation.ManageEmployees
                 SurnameTextBox.Text = "";
                 SurnameTextBox.AppendText(inputName);
                 SurnameTextBox.BackColor = Color.LightGreen;
-                _mockEmployee.Surname = inputName;
 
             }
             else
@@ -84,7 +81,21 @@ namespace Employees.Presentation.ManageEmployees
                 SurnameTextBox.BackColor = Color.IndianRed;
             }
         }
-
+        private void SecondNameTextBox_KeyPress(object sender, EventArgs e)
+        {
+            if (NameExtension.TryName(out var inputName, SecondNameTextBox.Text))
+            {
+                SecondNameTextBox.Text = "";
+                SecondNameTextBox.AppendText(inputName);
+                SecondNameTextBox.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                SecondNameTextBox.Text = "";
+                SecondNameTextBox.AppendText(inputName);
+                SecondNameTextBox.BackColor = Color.IndianRed;
+            }
+        }
         private void OibTextBox_TextChanged(object sender, EventArgs e)
         {
             _mockEmployee.Oib = OibTextBox.Text;
@@ -117,6 +128,9 @@ namespace Employees.Presentation.ManageEmployees
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+            _mockEmployee.Forename = NameTextBox.Text;
+            _mockEmployee.SecondForename = SecondNameTextBox.Text;
+            _mockEmployee.Surname = SecondNameTextBox.Text;
             _mainRepository.DataEmployees.AddEmployee(_mockEmployee);
             foreach (var project in ListProjects.CheckedItems)
             {
@@ -133,22 +147,6 @@ namespace Employees.Presentation.ManageEmployees
             Close();
         }
 
-        private void SecondNameTextBox_KeyPress(object sender, EventArgs e)
-        {
-            if (NameExtension.TryName(out var inputName, SecondNameTextBox.Text))
-            {
-                SecondNameTextBox.Text = "";
-                SecondNameTextBox.AppendText(inputName);
-                SecondNameTextBox.BackColor = Color.LightGreen;
-                _mockEmployee.SecondForename = inputName;
 
-            }
-            else
-            {
-                SecondNameTextBox.Text = "";
-                SecondNameTextBox.AppendText(inputName);
-                SecondNameTextBox.BackColor = Color.IndianRed;
-            }
-        }
     }
 }

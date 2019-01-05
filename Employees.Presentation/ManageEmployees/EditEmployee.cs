@@ -13,6 +13,7 @@ using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
+using Employees.Infrastructure.Extension;
 using Employees.Presentation.ManageEmployees.Popouts;
 
 namespace Employees.Presentation.ManageEmployees
@@ -21,6 +22,7 @@ namespace Employees.Presentation.ManageEmployees
     {
         private MainRepository _mainRepository;
         private int _currentEmployeeIndex = 0;
+        private Employee _mockEmployee;
         private Employee _currentEmployee;
         public EditEmployee(MainRepository mainRepository)
         {
@@ -51,12 +53,14 @@ namespace Employees.Presentation.ManageEmployees
         private void RefreshEmployee()
         {
             _currentEmployee = _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex];
-            NameTextBox.Text = _currentEmployee.Forename;
+            _mockEmployee = new Employee(_currentEmployee.Forename, _currentEmployee.Surname, _currentEmployee.Oib,
+                _currentEmployee.DateBirth, _currentEmployee.Position, _currentEmployee.SecondForename);
+            NameTextBox.Text = _mockEmployee.Forename;
             CheckIfSecondName();
-            SurnameTextBox.Text = _currentEmployee.Surname;
-            OibTextBox.Text = _currentEmployee.Oib;
-            DateTimeBirthday.Value = _currentEmployee.DateBirth;
-            ComboPosition.Text = Enum.GetName(typeof(Position), _currentEmployee.Position);
+            SurnameTextBox.Text = _mockEmployee.Surname;
+            OibTextBox.Text = _mockEmployee.Oib;
+            DateTimeBirthday.Value = _mockEmployee.DateBirth;
+            ComboPosition.Text = Enum.GetName(typeof(Position), _mockEmployee.Position);
             CurrentPageTextBox.Text = $@"{_currentEmployeeIndex+1} / {_mainRepository.DataEmployees.GetAllEmployees().Count}";
             FillEmployeeList();
         }
@@ -64,11 +68,11 @@ namespace Employees.Presentation.ManageEmployees
 
         private void CheckIfSecondName()
         {
-           if(_currentEmployee.SecondForename != null)
+           if(_mockEmployee.SecondForename != null)
            {
                CheckBoxSecondName.Checked = true;
                SecondNameTextBox.Show();
-               SecondNameTextBox.Text = _currentEmployee.SecondForename;
+               SecondNameTextBox.Text = _mockEmployee.SecondForename;
                return;
            }
            CheckBoxSecondName.Checked = false;
@@ -111,10 +115,10 @@ namespace Employees.Presentation.ManageEmployees
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            var tmpRelationEmployeeProjectList = new List<RelationEmployeeProject>();
-            _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex] =
-                new Employee(_currentEmployee.Forename, _currentEmployee.Oib, _currentEmployee.Oib,
-                    _currentEmployee.DateBirth, _currentEmployee.Position, _currentEmployee.SecondForename);
+            _mockEmployee.Forename = NameTextBox.Text;
+            _mockEmployee.SecondForename = SecondNameTextBox.Text;
+            _mockEmployee.Surname = SurnameTextBox.Text;
+            var tmpRelationEmployeeProjectList = new List<RelationEmployeeProject>();         
             foreach (var relationEmployeeProject in _mainRepository.RelationEmployeeProject)
             {
                 if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
@@ -125,6 +129,12 @@ namespace Employees.Presentation.ManageEmployees
             {
                 if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
                     _mainRepository.RelationEmployeeProject.Remove(relationEmployeeProject);
+            }
+
+            _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex] = _mockEmployee;
+            foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
+            {
+                relationEmployeeProject.EmployeeOib = _mockEmployee.Oib;
             }
             foreach (var checkedItem in ListProjects.CheckedItems)
             {
@@ -145,21 +155,53 @@ namespace Employees.Presentation.ManageEmployees
             RefreshEmployee();
         }
 
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        private void NameTextBox_KeyPress(object sender, EventArgs e)
         {
-            _currentEmployee.Forename = NameTextBox.Text;
+            if (NameExtension.TryName(out var inputName, NameTextBox.Text))
+            {
+                NameTextBox.Text = "";
+                NameTextBox.AppendText(inputName);
+                NameTextBox.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                NameTextBox.Text = "";
+                NameTextBox.AppendText(inputName);
+                NameTextBox.BackColor = Color.IndianRed;
+            }
+
         }
 
-        private void SecondNameTextBox_TextChanged(object sender, EventArgs e)
+        private void SurnameTextBox_KeyPress(object sender, EventArgs e)
         {
-            _currentEmployee.SecondForename = SecondNameTextBox.Text;
+            if (NameExtension.TryName(out var inputName, SurnameTextBox.Text))
+            {
+                SurnameTextBox.Text = "";
+                SurnameTextBox.AppendText(inputName);
+                SurnameTextBox.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                SurnameTextBox.Text = "";
+                SurnameTextBox.AppendText(inputName);
+                SurnameTextBox.BackColor = Color.IndianRed;
+            }
         }
-
-        private void SurnameTextBox_TextChanged(object sender, EventArgs e)
+        private void SecondNameTextBox_KeyPress(object sender, EventArgs e)
         {
-            _currentEmployee.Surname = SurnameTextBox.Text;
+            if (NameExtension.TryName(out var inputName, SecondNameTextBox.Text))
+            {
+                SecondNameTextBox.Text = "";
+                SecondNameTextBox.AppendText(inputName);
+                SecondNameTextBox.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                SecondNameTextBox.Text = "";
+                SecondNameTextBox.AppendText(inputName);
+                SecondNameTextBox.BackColor = Color.IndianRed;
+            }
         }
-
         private void OibTextBox_TextChanged(object sender, EventArgs e)
         {
             _currentEmployee.Oib = OibTextBox.Text;
