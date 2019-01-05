@@ -59,16 +59,6 @@ namespace Employees.Domain.Repository
 
             return sumOfActive.ToString("G");
         }
-        public int GetIndexOfRelation(RelationEmployeeProject argRelation)
-        {
-            for (var relationIndex = 0; relationIndex < RelationEmployeeProject.Count; relationIndex++)
-            {
-                if (!RelationEmployeeProject[relationIndex].Equals(argRelation)) continue;
-                return relationIndex;
-            }
-
-            return -1;
-        }
         public int GetNumberOfRelationsOfProject(Guid projectId)
         {
             var counterOfProjects = 0;

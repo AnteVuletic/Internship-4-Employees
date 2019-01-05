@@ -13,6 +13,7 @@ using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Presentation.ManageEmployees.Popouts;
+using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageProjects
 {
@@ -212,31 +213,45 @@ namespace Employees.Presentation.ManageProjects
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (_mockProject == null)
+            if (_mainRepository.DataProjects.GetAllProjects().FindAll(projectInQuestion => projectInQuestion.Name == NameTextBox.Text).Count > 1)
             {
-                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProjectPlan;
+                new WarningTemplate("This project name is taken").ShowDialog();
             }
             else
             {
-                _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProject;
-            }
-            foreach (var checkedItem in EmployeeCheckedList.CheckedItems)
-            {
-                var checkedEmployee = _mainRepository.DataEmployees.GetAllEmployees()
-                    .Find(employee => employee.Equals(checkedItem));
-                EmployeeTime popoutEmployeeTime;
-                if (_employeesOnProject.Contains(new RelationEmployeeProject(checkedEmployee, _currentProjectPlan)))
+                if (EmployeeCheckedList.CheckedItems.Count == 0)
                 {
-                    popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan
-                        , _employeesOnProject.Find(relation => relation.EmployeeOib == checkedEmployee.Oib).TimeOnProjectWeek);
+                    new WarningTemplate("Please add employees to project").ShowDialog();
                 }
                 else
                 {
-                    popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan);
+                    if (_mockProject == null)
+                    {
+                        _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProjectPlan;
+                    }
+                    else
+                    {
+                        _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex] = _mockProject;
+                    }
+                    foreach (var checkedItem in EmployeeCheckedList.CheckedItems)
+                    {
+                        var checkedEmployee = _mainRepository.DataEmployees.GetAllEmployees()
+                            .Find(employee => employee.Equals(checkedItem));
+                        EmployeeTime popoutEmployeeTime;
+                        if (_employeesOnProject.Contains(new RelationEmployeeProject(checkedEmployee, _currentProjectPlan)))
+                        {
+                            popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan
+                                , _employeesOnProject.Find(relation => relation.EmployeeOib == checkedEmployee.Oib).TimeOnProjectWeek);
+                        }
+                        else
+                        {
+                            popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan);
+                        }
+                        popoutEmployeeTime.ShowDialog();
+                    }
+                    Close();
                 }
-                popoutEmployeeTime.ShowDialog();
             }
-            Close();
         }
     }
 }

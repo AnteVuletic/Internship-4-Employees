@@ -59,10 +59,8 @@ namespace Employees.Presentation.ManageEmployees.Popouts
         {
             if (_flagForEdit)
             {
-                _mainRepository
-                    .RelationEmployeeProject[
-                        _mainRepository.GetIndexOfRelation(new RelationEmployeeProject(_employee, _project))]
-                    .TimeOnProjectWeek = _tmpTimeWeek;
+                var relationFound = _mainRepository.RelationEmployeeProject.Find(relation => relation.ProjectGuid == _project.Id);
+                relationFound.TimeOnProjectWeek = _tmpTimeWeek;
             }
             else
             {

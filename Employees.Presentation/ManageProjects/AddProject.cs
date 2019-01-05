@@ -12,6 +12,7 @@ using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Presentation.ManageEmployees.Popouts;
+using Employees.Presentation.Warnings;
 
 
 namespace Employees.Presentation.ManageProjects
@@ -85,26 +86,48 @@ namespace Employees.Presentation.ManageProjects
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (!RealCheckbox.Checked)
+            if (_mainRepository.DataProjects.GetProjectByName(NameTextBox.Text) != null)
             {
-                _mainRepository.DataProjects.AddProject(_projectPlan);
-                foreach (var selectedEmployee in _selectedEmployees)
-                {
-                    var popoutEmployeeSelectedWeeklyTime = new EmployeeTime(_mainRepository, selectedEmployee, _projectPlan);
-                    popoutEmployeeSelectedWeeklyTime.ShowDialog();
-                }
+                new WarningTemplate("This project name is taken").ShowDialog();
             }
             else
             {
-                _mainRepository.DataProjects.AddProject(_project);
-                foreach (var selectedEmployee in _selectedEmployees)
+                if (_selectedEmployees.Count == 0)
                 {
-                    var popoutEmployeeSelectedWeeklyTime = new EmployeeTime(_mainRepository, selectedEmployee, _project);
-                    popoutEmployeeSelectedWeeklyTime.ShowDialog();
+                    new WarningTemplate("Please add employees to project").ShowDialog();
+                }
+                else
+                {
+
+                    if (!RealCheckbox.Checked)
+                    {
+                        _projectPlan.Name = _projectPlan.Name.Trim();
+                        _projectPlan.Name = _projectPlan.Name.First().ToString().ToUpper() +
+                                            string.Join("", _projectPlan.Name.Skip(1));
+                        _mainRepository.DataProjects.AddProject(_projectPlan);
+                        foreach (var selectedEmployee in _selectedEmployees)
+                        {
+                            var popoutEmployeeSelectedWeeklyTime = new EmployeeTime(_mainRepository, selectedEmployee, _projectPlan);
+                            popoutEmployeeSelectedWeeklyTime.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        _project.Name = _project.Name.Trim();
+                        _project.Name = _project.Name.First().ToString().ToUpper() +
+                                            string.Join("", _project.Name.Skip(1));
+                        _mainRepository.DataProjects.AddProject(_project);
+                        foreach (var selectedEmployee in _selectedEmployees)
+                        {
+                            var popoutEmployeeSelectedWeeklyTime = new EmployeeTime(_mainRepository, selectedEmployee, _project);
+                            popoutEmployeeSelectedWeeklyTime.ShowDialog();
+                        }
+                    }
+
+                    Close();
                 }
             }
-
-            Close();
+            
         }
 
         private void EmployeeCheckedList_SelectedIndexChanged(object sender, EventArgs e)

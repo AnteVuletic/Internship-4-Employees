@@ -25,10 +25,6 @@ namespace Employees.Domain.Database_Scheme
             TimeOnProjectWeek = timeOnProjectWeek;
         }
 
-        public int GetEmployeeHour(Employee argEmployee)
-        {
-            return argEmployee.Oib == EmployeeOib ? TimeOnProjectWeek : 0;
-        }
         public override bool Equals(object obj)
         {
             if (!(obj is RelationEmployeeProject))

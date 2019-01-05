@@ -16,18 +16,18 @@ namespace Employees.Domain.Database_Scheme
             ProjectList.Add(passedProject);
             return true;
         }
-        public bool RemoveProjectByName(string passedName)
+        public ProjectPlan GetProjectByName(string argProjectName)
         {
-            foreach (var project in ProjectList)
+            foreach (var projectPlan in ProjectList)
             {
-                if (project.Name != passedName) continue;
-                ProjectList.Remove(project);
-                return true;
+                if (projectPlan.Name == argProjectName)
+                {
+                    return projectPlan;
+                }
             }
 
-            return false;
+            return null;
         }
-
         public ProjectPlan GetProjectById(Guid argId)
         {
             foreach (var projectPlan in ProjectList)
