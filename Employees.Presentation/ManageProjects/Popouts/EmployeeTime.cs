@@ -19,7 +19,7 @@ namespace Employees.Presentation.ManageEmployees.Popouts
         private MainRepository _mainRepository;
         private readonly Employee _employee;
         private readonly ProjectPlan _project;
-        private int _tmpTimeWeek = 0;
+        private int _tmpTimeWeek;
         private bool _flagForEdit = false;
         public EmployeeTime(MainRepository mainRepository, Employee employee, ProjectPlan project)
         {
@@ -27,6 +27,7 @@ namespace Employees.Presentation.ManageEmployees.Popouts
             _mainRepository = mainRepository;
             _employee = employee;
             _project = project;
+            _tmpTimeWeek = 0;
             RefreshEmployeeInfo();
         }
 

@@ -81,7 +81,7 @@ namespace Employees.Presentation.ManageEmployees
             this.OibTextBox.Name = "OibTextBox";
             this.OibTextBox.Size = new System.Drawing.Size(200, 20);
             this.OibTextBox.TabIndex = 34;
-            this.OibTextBox.KeyPress += new KeyPressEventHandler(this.OibTextBox_KeyPress);
+            this.OibTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OibTextBox_KeyPress);
             // 
             // SurnameTextBox
             // 
@@ -230,50 +230,55 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // BtnPrev
             // 
+            this.BtnPrev.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
             this.BtnPrev.Location = new System.Drawing.Point(112, 439);
             this.BtnPrev.Name = "BtnPrev";
             this.BtnPrev.Size = new System.Drawing.Size(28, 28);
             this.BtnPrev.TabIndex = 38;
             this.BtnPrev.Text = "<";
-            this.BtnPrev.UseVisualStyleBackColor = true;
+            this.BtnPrev.UseVisualStyleBackColor = false;
             this.BtnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
             // 
             // BtnNext
             // 
+            this.BtnNext.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
             this.BtnNext.Location = new System.Drawing.Point(186, 439);
             this.BtnNext.Name = "BtnNext";
             this.BtnNext.Size = new System.Drawing.Size(28, 28);
             this.BtnNext.TabIndex = 39;
             this.BtnNext.Text = ">";
-            this.BtnNext.UseVisualStyleBackColor = true;
+            this.BtnNext.UseVisualStyleBackColor = false;
             this.BtnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
             // BtnLastEmployee
             // 
+            this.BtnLastEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnLastEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
             this.BtnLastEmployee.Location = new System.Drawing.Point(220, 439);
             this.BtnLastEmployee.Name = "BtnLastEmployee";
             this.BtnLastEmployee.Size = new System.Drawing.Size(28, 28);
             this.BtnLastEmployee.TabIndex = 40;
             this.BtnLastEmployee.Text = ">>";
-            this.BtnLastEmployee.UseVisualStyleBackColor = true;
+            this.BtnLastEmployee.UseVisualStyleBackColor = false;
             this.BtnLastEmployee.Click += new System.EventHandler(this.BtnLastEmployee_Click);
             // 
             // BtnFirstEmployee
             // 
+            this.BtnFirstEmployee.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BtnFirstEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
             this.BtnFirstEmployee.Location = new System.Drawing.Point(78, 439);
             this.BtnFirstEmployee.Name = "BtnFirstEmployee";
             this.BtnFirstEmployee.Size = new System.Drawing.Size(28, 28);
             this.BtnFirstEmployee.TabIndex = 41;
             this.BtnFirstEmployee.Text = "<<";
-            this.BtnFirstEmployee.UseVisualStyleBackColor = true;
+            this.BtnFirstEmployee.UseVisualStyleBackColor = false;
             this.BtnFirstEmployee.Click += new System.EventHandler(this.BtnFirstEmployee_Click);
             // 
             // CurrentPageTextBox
             // 
+            this.CurrentPageTextBox.BackColor = System.Drawing.Color.LightGreen;
             this.CurrentPageTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.CurrentPageTextBox.Location = new System.Drawing.Point(146, 441);
             this.CurrentPageTextBox.Name = "CurrentPageTextBox";

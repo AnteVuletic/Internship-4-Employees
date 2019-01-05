@@ -17,10 +17,24 @@ namespace Employees.Presentation.Warnings
             Action<Control.ControlCollection> function = null;
             function = (controls) =>
             {
+                var ifExitLoop = false;
                 foreach (var control in controls)
                 {
-                    if (!(control is TextBox textBox)) continue;
-                    isColor = textBox.BackColor == Color.LightGreen;
+                    switch (control)
+                    {
+                        case TextBox textBox:
+                        {
+                            isColor = textBox.BackColor == Color.LightGreen;
+                            if (!isColor) ifExitLoop = true;
+                            break;
+                        }
+                            
+                        case ComboBox comboBox:
+                            isColor = comboBox.BackColor == Color.LightGreen;
+                            if (!isColor) ifExitLoop = true;
+                            break;
+                    }
+                    if (ifExitLoop) break;
                 }
             };
             function(formPassed.Controls);

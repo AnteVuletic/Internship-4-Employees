@@ -37,11 +37,11 @@ namespace Employees.Presentation.ManageEmployees
             var positionNames = Enum.GetNames(typeof(Position));
             foreach (var positionName in positionNames)
             {
-                ComboPosition.Items.Add(positionName);                    
+                ComboPosition.Items.Add(positionName);
             }
         }
 
-        private void FillEmployeeList()
+        private void FillProjectList()
         {
             ListProjects.Items.Clear();
             foreach (var project in _mainRepository.DataProjects.GetAllProjects())
@@ -64,7 +64,7 @@ namespace Employees.Presentation.ManageEmployees
             DateTimeBirthday.Value = _mockEmployee.DateBirth;
             ComboPosition.Text = Enum.GetName(typeof(Position), _mockEmployee.Position);
             CurrentPageTextBox.Text = $@"{_currentEmployeeIndex+1} / {_mainRepository.DataEmployees.GetAllEmployees().Count}";
-            FillEmployeeList();
+            FillProjectList();
         }
 
 
@@ -133,7 +133,7 @@ namespace Employees.Presentation.ManageEmployees
                 if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
                     tmpRelationEmployeeProjectList.Add(relationEmployeeProject);
             }
-            var isOnlyEmployeeButRemovedFromProject = true;
+            var isOnlyEmployeeButRemovedFromProject = false;
             foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
             {
                 if (relationEmployeeProject.EmployeeOib == _currentEmployee.Oib)
@@ -146,25 +146,25 @@ namespace Employees.Presentation.ManageEmployees
                     if (projectInQuestion is Project realProjectInQuestion)
                     {
                         if (realProjectInQuestion.ToString() != checkedItem.ToString()) continue;
-                        isOnlyEmployeeButRemovedFromProject = false;
+                        isOnlyEmployeeButRemovedFromProject = true;
                     }
                     else
                     {
                         if (projectInQuestion.ToString() != checkedItem.ToString()) continue;
-                        isOnlyEmployeeButRemovedFromProject = false;
+                        isOnlyEmployeeButRemovedFromProject = true;
                     }
                 }
                     
             }
 
-            if (CheckSave.CheckForm(this) || !isOnlyEmployeeButRemovedFromProject)
+            if (!CheckSave.CheckForm(this) || !isOnlyEmployeeButRemovedFromProject)
             {
                 foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
                 {
                     _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
                 }
 
-                if (isOnlyEmployeeButRemovedFromProject)
+                if (!isOnlyEmployeeButRemovedFromProject)
                 {
                     var popoutWindowWarning = new WarningTemplate("Tried to remove only employee on project.");
                     popoutWindowWarning.ShowDialog();
@@ -180,21 +180,19 @@ namespace Employees.Presentation.ManageEmployees
 
                 foreach (var checkedItem in ListProjects.CheckedItems)
                 {
-                    var checkedItemAppeared = false;
+                    var projectFound = _mainRepository.DataProjects.GetAllProjects().Find(projectInQuestion => (projectInQuestion is Project project)
+                        ? project.ToString() == checkedItem.ToString()
+                        : projectInQuestion.ToString() == checkedItem.ToString());
                     foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
                     {
-                        if (_mainRepository.DataProjects.GetProjectById(relationEmployeeProject.ProjectGuid)
-                                .ToString() !=
-                            checkedItem.ToString()) continue;
-                        checkedItemAppeared = true;
-                        _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
+                        if (relationEmployeeProject.ProjectGuid == projectFound.Id)
+                        {
+                            _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee,projectFound));
+                            new EmployeeTime(_mainRepository,_mockEmployee,projectFound,relationEmployeeProject.TimeOnProjectWeek).ShowDialog();
+                        }
+                        else
+                            new EmployeeTime(_mainRepository, _mockEmployee, projectFound).ShowDialog();
                     }
-
-                    if (checkedItemAppeared) continue;
-                    var projectRefrence = _mainRepository.DataProjects.GetAllProjects().Find(
-                        projectIterator => projectIterator.ToString() == checkedItem.ToString());
-                    var popoutEmployeeTime = new EmployeeTime(_mainRepository, _currentEmployee, projectRefrence);
-                    popoutEmployeeTime.ShowDialog();
                 }
             }
 
@@ -236,8 +234,15 @@ namespace Employees.Presentation.ManageEmployees
 
         private void ComboPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _mockEmployee.Position = (Position)Enum.Parse(typeof(Position), ComboPosition.Text);
-            ComboPosition.BackColor = Color.LightGreen;
+            if (Enum.TryParse<Position>(ComboPosition.Text, out var outResult))
+            {
+                _mockEmployee.Position = outResult;
+                ComboPosition.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                ComboPosition.BackColor = Color.IndianRed;
+            }
         }
 
     }

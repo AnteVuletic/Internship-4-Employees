@@ -8,8 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Data.Project;
+using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
+using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageEmployees
 {
@@ -34,6 +37,17 @@ namespace Employees.Presentation.ManageEmployees
             BirthdayTextBox.Text = _currentEmployee.DateBirth.ToString("MM/dd/yyyy");
             PositionTextBox.Text = Enum.GetName(typeof(Position), _currentEmployee.Position);
             CurrentPageTextBox.Text = $@"{_currentEmployeeIndex + 1} / {_mainRepository.DataEmployees.GetAllEmployees().Count()}";
+            FillProjectList();
+        }
+        private void FillProjectList()
+        {
+            ListProjects.Items.Clear();
+            foreach (var project in _mainRepository.DataProjects.GetAllProjects())
+            {
+                ListProjects.Items.Add(project);
+                if (_mainRepository.RelationEmployeeProject.Contains(new RelationEmployeeProject(_currentEmployee, project)))
+                    ListProjects.SetItemChecked(ListProjects.Items.IndexOf(project), true);
+            }
         }
         private void CheckIfSecondName()
         {
@@ -50,8 +64,28 @@ namespace Employees.Presentation.ManageEmployees
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            _mainRepository.DataEmployees.GetAllEmployees().Remove(_currentEmployee);
-            RefreshEmployee();
+            var isDeletable = true;
+            foreach (var checkedItem in ListProjects.CheckedItems)
+            {
+                var projectFound = _mainRepository.DataProjects.GetAllProjects().Find(projectInQuestion => (projectInQuestion is Project project)
+                    ? project.ToString() == checkedItem.ToString()
+                    : projectInQuestion.ToString() == checkedItem.ToString());
+                if (_mainRepository.GetNumberOfRelationsOfProject(projectFound.Id) <= 1)
+                    isDeletable = false;
+
+            }
+
+            if (isDeletable)
+            {
+                _mainRepository.RelationEmployeeProject.RemoveAll(
+                    project => project.EmployeeOib == _currentEmployee.Oib);
+                _mainRepository.DataEmployees.GetAllEmployees().Remove(_currentEmployee);
+                RefreshEmployee();
+            }
+            else
+            {
+                new WarningTemplate("You can't delete this employee he's solo on project.").ShowDialog();
+            }
         }
 
         private void BtnNext_Click(object sender, EventArgs e)

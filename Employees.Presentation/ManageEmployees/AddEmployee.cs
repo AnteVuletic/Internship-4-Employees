@@ -104,8 +104,16 @@ namespace Employees.Presentation.ManageEmployees
 
         private void ComboPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _mockEmployee.Position = (Position)Enum.Parse(typeof(Position), ComboPosition.Text);
-            ComboPosition.BackColor = Color.LightGreen;
+            if (Enum.TryParse<Position>(ComboPosition.Text, out var outResult))
+            {
+                _mockEmployee.Position = outResult;
+                ComboPosition.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                ComboPosition.BackColor = Color.IndianRed;
+            }
+            
         }
 
 
