@@ -157,50 +157,23 @@ namespace Employees.Presentation.ManageEmployees
 
         private void NameTextBox_KeyPress(object sender, EventArgs e)
         {
-            if (NameExtension.TryName(out var inputName, NameTextBox.Text))
-            {
-                NameTextBox.Text = "";
-                NameTextBox.AppendText(inputName);
-                NameTextBox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                NameTextBox.Text = "";
-                NameTextBox.AppendText(inputName);
-                NameTextBox.BackColor = Color.IndianRed;
-            }
+            NameTextBox.BackColor = NameExtension.TryName(out var inputName, NameTextBox.Text) ? Color.LightGreen : Color.IndianRed;
+            NameTextBox.Text = "";
+            NameTextBox.AppendText(inputName);
 
         }
 
         private void SurnameTextBox_KeyPress(object sender, EventArgs e)
         {
-            if (NameExtension.TryName(out var inputName, SurnameTextBox.Text))
-            {
-                SurnameTextBox.Text = "";
-                SurnameTextBox.AppendText(inputName);
-                SurnameTextBox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                SurnameTextBox.Text = "";
-                SurnameTextBox.AppendText(inputName);
-                SurnameTextBox.BackColor = Color.IndianRed;
-            }
+            SurnameTextBox.BackColor = NameExtension.TryName(out var inputName, SurnameTextBox.Text) ? Color.LightGreen : Color.IndianRed;
+            SurnameTextBox.Text = "";
+            SurnameTextBox.AppendText(inputName);
         }
         private void SecondNameTextBox_KeyPress(object sender, EventArgs e)
         {
-            if (NameExtension.TryName(out var inputName, SecondNameTextBox.Text))
-            {
-                SecondNameTextBox.Text = "";
-                SecondNameTextBox.AppendText(inputName);
-                SecondNameTextBox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                SecondNameTextBox.Text = "";
-                SecondNameTextBox.AppendText(inputName);
-                SecondNameTextBox.BackColor = Color.IndianRed;
-            }
+            SecondNameTextBox.BackColor = NameExtension.TryName(out var inputName, SecondNameTextBox.Text) ? Color.LightGreen : Color.IndianRed;
+            SecondNameTextBox.Text = "";
+            SecondNameTextBox.AppendText(inputName);
         }
         private void OibTextBox_TextChanged(object sender, EventArgs e)
         {

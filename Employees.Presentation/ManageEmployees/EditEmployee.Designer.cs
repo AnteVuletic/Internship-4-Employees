@@ -66,15 +66,18 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // SecondNameTextBox
             // 
+            this.SecondNameTextBox.BackColor = System.Drawing.Color.LightGreen;
             this.SecondNameTextBox.Location = new System.Drawing.Point(104, 129);
             this.SecondNameTextBox.Name = "SecondNameTextBox";
             this.SecondNameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SecondNameTextBox.TabIndex = 35;
-            this.SecondNameTextBox.KeyPress += new KeyPressEventHandler(this.SecondNameTextBox_KeyPress);
+            this.SecondNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SecondNameTextBox_KeyPress);
             // 
             // OibTextBox
             // 
-            this.OibTextBox.Location = new System.Drawing.Point(104, 193);
+            this.OibTextBox.BackColor = System.Drawing.Color.LightGreen;
+            this.OibTextBox.Location = new System.Drawing.Point(63, 206);
+            this.OibTextBox.MaxLength = 11;
             this.OibTextBox.Name = "OibTextBox";
             this.OibTextBox.Size = new System.Drawing.Size(200, 20);
             this.OibTextBox.TabIndex = 34;
@@ -82,19 +85,21 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // SurnameTextBox
             // 
+            this.SurnameTextBox.BackColor = System.Drawing.Color.LightGreen;
             this.SurnameTextBox.Location = new System.Drawing.Point(104, 155);
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SurnameTextBox.TabIndex = 33;
-            this.SurnameTextBox.KeyPress += new KeyPressEventHandler(this.SurnameTextBox_KeyPress);
+            this.SurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
             // 
             // NameTextBox
             // 
+            this.NameTextBox.BackColor = System.Drawing.Color.LightGreen;
             this.NameTextBox.Location = new System.Drawing.Point(104, 76);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(200, 20);
             this.NameTextBox.TabIndex = 32;
-            this.NameTextBox.KeyPress += new KeyPressEventHandler(this.NameTextBox_KeyPress);
+            this.NameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
             // CheckBoxSecondName
             // 
@@ -133,7 +138,7 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // ListProjects
             // 
-            this.ListProjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ListProjects.BackColor = System.Drawing.Color.LightGreen;
             this.ListProjects.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.ListProjects.ForeColor = System.Drawing.SystemColors.Desktop;
             this.ListProjects.FormattingEnabled = true;
@@ -144,6 +149,7 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // ComboPosition
             // 
+            this.ComboPosition.BackColor = System.Drawing.Color.LightGreen;
             this.ComboPosition.FormattingEnabled = true;
             this.ComboPosition.Location = new System.Drawing.Point(104, 286);
             this.ComboPosition.Name = "ComboPosition";
@@ -164,9 +170,11 @@ namespace Employees.Presentation.ManageEmployees
             // DateTimeBirthday
             // 
             this.DateTimeBirthday.Location = new System.Drawing.Point(104, 232);
+            this.DateTimeBirthday.MaxDate = new System.DateTime(2019, 1, 5, 0, 0, 0, 0);
             this.DateTimeBirthday.Name = "DateTimeBirthday";
             this.DateTimeBirthday.Size = new System.Drawing.Size(200, 20);
             this.DateTimeBirthday.TabIndex = 25;
+            this.DateTimeBirthday.Value = new System.DateTime(2019, 1, 5, 0, 0, 0, 0);
             this.DateTimeBirthday.ValueChanged += new System.EventHandler(this.DateTimeBirthday_ValueChanged);
             // 
             // label5
@@ -182,12 +190,12 @@ namespace Employees.Presentation.ManageEmployees
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(14, 191);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label3.Location = new System.Drawing.Point(60, 186);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 20);
+            this.label3.Size = new System.Drawing.Size(218, 17);
             this.label3.TabIndex = 23;
-            this.label3.Text = "OIB";
+            this.label3.Text = "OIB [Press enter to confirm entry]";
             // 
             // label4
             // 

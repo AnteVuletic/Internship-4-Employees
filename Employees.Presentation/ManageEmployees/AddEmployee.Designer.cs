@@ -44,9 +44,9 @@ namespace Employees.Presentation.ManageEmployees
             this.CheckBoxSecondName = new System.Windows.Forms.CheckBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SurnameTextBox = new System.Windows.Forms.TextBox();
-            this.OibTextBox = new System.Windows.Forms.TextBox();
             this.SecondNameTextBox = new System.Windows.Forms.TextBox();
             this.SecondNameLabel = new System.Windows.Forms.Label();
+            this.OibTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -83,12 +83,12 @@ namespace Employees.Presentation.ManageEmployees
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(12, 191);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label3.Location = new System.Drawing.Point(58, 186);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 20);
+            this.label3.Size = new System.Drawing.Size(218, 17);
             this.label3.TabIndex = 6;
-            this.label3.Text = "OIB";
+            this.label3.Text = "OIB [Press enter to confirm entry]";
             // 
             // label5
             // 
@@ -103,9 +103,11 @@ namespace Employees.Presentation.ManageEmployees
             // DateTimeBirthday
             // 
             this.DateTimeBirthday.Location = new System.Drawing.Point(102, 232);
+            this.DateTimeBirthday.MaxDate = new System.DateTime(2126, 12, 2, 0, 0, 0, 0);
             this.DateTimeBirthday.Name = "DateTimeBirthday";
             this.DateTimeBirthday.Size = new System.Drawing.Size(200, 20);
             this.DateTimeBirthday.TabIndex = 8;
+            this.DateTimeBirthday.Value = new System.DateTime(2000, 1, 5, 16, 37, 0, 0);
             this.DateTimeBirthday.ValueChanged += new System.EventHandler(this.DateTimeBirthday_ValueChanged);
             // 
             // label6
@@ -120,6 +122,7 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // ComboPosition
             // 
+            this.ComboPosition.BackColor = System.Drawing.Color.IndianRed;
             this.ComboPosition.FormattingEnabled = true;
             this.ComboPosition.Location = new System.Drawing.Point(102, 286);
             this.ComboPosition.Name = "ComboPosition";
@@ -177,35 +180,30 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // NameTextBox
             // 
+            this.NameTextBox.BackColor = System.Drawing.Color.IndianRed;
             this.NameTextBox.Location = new System.Drawing.Point(102, 76);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(200, 20);
             this.NameTextBox.TabIndex = 15;
-            this.NameTextBox.KeyPress += new KeyPressEventHandler(this.NameTextBox_KeyPress);
+            this.NameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
             // SurnameTextBox
             // 
+            this.SurnameTextBox.BackColor = System.Drawing.Color.IndianRed;
             this.SurnameTextBox.Location = new System.Drawing.Point(102, 155);
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SurnameTextBox.TabIndex = 16;
-            this.SurnameTextBox.KeyPress += new KeyPressEventHandler(this.SurnameTextBox_KeyPress);
-            // 
-            // OibTextBox
-            // 
-            this.OibTextBox.Location = new System.Drawing.Point(102, 193);
-            this.OibTextBox.Name = "OibTextBox";
-            this.OibTextBox.Size = new System.Drawing.Size(200, 20);
-            this.OibTextBox.TabIndex = 17;
-            this.OibTextBox.TextChanged += new System.EventHandler(this.OibTextBox_TextChanged);
+            this.SurnameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SurnameTextBox_KeyPress);
             // 
             // SecondNameTextBox
             // 
+            this.SecondNameTextBox.BackColor = System.Drawing.Color.IndianRed;
             this.SecondNameTextBox.Location = new System.Drawing.Point(102, 129);
             this.SecondNameTextBox.Name = "SecondNameTextBox";
             this.SecondNameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SecondNameTextBox.TabIndex = 18;
-            this.SecondNameTextBox.KeyPress += new KeyPressEventHandler(this.SecondNameTextBox_KeyPress);
+            this.SecondNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SecondNameTextBox_KeyPress);
             // 
             // SecondNameLabel
             // 
@@ -217,15 +215,25 @@ namespace Employees.Presentation.ManageEmployees
             this.SecondNameLabel.TabIndex = 19;
             this.SecondNameLabel.Text = "2nd Name";
             // 
+            // OibTextBox
+            // 
+            this.OibTextBox.BackColor = System.Drawing.Color.IndianRed;
+            this.OibTextBox.Location = new System.Drawing.Point(61, 206);
+            this.OibTextBox.MaxLength = 11;
+            this.OibTextBox.Name = "OibTextBox";
+            this.OibTextBox.Size = new System.Drawing.Size(200, 20);
+            this.OibTextBox.TabIndex = 20;
+            this.OibTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OibTextBox_KeyPress);
+            // 
             // AddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(328, 487);
+            this.Controls.Add(this.OibTextBox);
             this.Controls.Add(this.SecondNameLabel);
             this.Controls.Add(this.SecondNameTextBox);
-            this.Controls.Add(this.OibTextBox);
             this.Controls.Add(this.SurnameTextBox);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.CheckBoxSecondName);
@@ -262,8 +270,8 @@ namespace Employees.Presentation.ManageEmployees
         private System.Windows.Forms.CheckBox CheckBoxSecondName;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.TextBox SurnameTextBox;
-        private System.Windows.Forms.TextBox OibTextBox;
         private System.Windows.Forms.TextBox SecondNameTextBox;
         private System.Windows.Forms.Label SecondNameLabel;
+        private TextBox OibTextBox;
     }
 }

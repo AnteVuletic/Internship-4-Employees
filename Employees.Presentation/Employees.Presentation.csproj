@@ -120,6 +120,7 @@
     <Compile Include="View\ViewProjects.Designer.cs">
       <DependentUpon>ViewProjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warnings\CheckSave.cs" />
     <Compile Include="Warnings\WarningTemplate.cs">
       <SubType>Form</SubType>
     </Compile>

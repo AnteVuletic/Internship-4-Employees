@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,10 +23,12 @@ namespace Employees.Presentation.ManageEmployees
     {
         private readonly MainRepository _mainRepository;
         private readonly Employee _mockEmployee = new Employee("","","",DateTime.Now,Position.Accountant,"");
+
         public AddEmployee(MainRepository mainRepository)
         {
             InitializeComponent();
-            _mainRepository = mainRepository;           
+            _mainRepository = mainRepository;
+            DateTimeBirthday.MaxDate = new DateTime(DateTime.Today.Year - 18, DateTime.Today.Month ,DateTime.Today.Day);
             SecondNameLabel.Hide();
             SecondNameTextBox.Hide();
             FillDropDownPosition();
@@ -50,55 +53,30 @@ namespace Employees.Presentation.ManageEmployees
         }
         private void NameTextBox_KeyPress(object sender, EventArgs e)
         {
-            if (NameExtension.TryName(out var inputName, NameTextBox.Text))
-            {
-                NameTextBox.Text = "";
-                NameTextBox.AppendText(inputName);
-                NameTextBox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                NameTextBox.Text = "";
-                NameTextBox.AppendText(inputName);
-                NameTextBox.BackColor = Color.IndianRed;
-            }
-            
+            NameTextBox.BackColor = NameExtension.TryName(out var inputName, NameTextBox.Text) ? Color.LightGreen : Color.IndianRed;
+            NameTextBox.Text = "";
+            NameTextBox.AppendText(inputName);
+
         }
 
         private void SurnameTextBox_KeyPress(object sender, EventArgs e)
         {
-            if (NameExtension.TryName(out var inputName, SurnameTextBox.Text))
-            {
-                SurnameTextBox.Text = "";
-                SurnameTextBox.AppendText(inputName);
-                SurnameTextBox.BackColor = Color.LightGreen;
-
-            }
-            else
-            {
-                SurnameTextBox.Text = "";
-                SurnameTextBox.AppendText(inputName);
-                SurnameTextBox.BackColor = Color.IndianRed;
-            }
+            SurnameTextBox.BackColor = NameExtension.TryName(out var inputName, SurnameTextBox.Text) ? Color.LightGreen : Color.IndianRed;
+            SurnameTextBox.Text = "";
+            SurnameTextBox.AppendText(inputName);
         }
         private void SecondNameTextBox_KeyPress(object sender, EventArgs e)
         {
-            if (NameExtension.TryName(out var inputName, SecondNameTextBox.Text))
-            {
-                SecondNameTextBox.Text = "";
-                SecondNameTextBox.AppendText(inputName);
-                SecondNameTextBox.BackColor = Color.LightGreen;
-            }
-            else
-            {
-                SecondNameTextBox.Text = "";
-                SecondNameTextBox.AppendText(inputName);
-                SecondNameTextBox.BackColor = Color.IndianRed;
-            }
+            SecondNameTextBox.BackColor = NameExtension.TryName(out var inputName, SecondNameTextBox.Text) ? Color.LightGreen : Color.IndianRed;
+            SecondNameTextBox.Text = "";
+            SecondNameTextBox.AppendText(inputName);
         }
-        private void OibTextBox_TextChanged(object sender, EventArgs e)
+        private void OibTextBox_KeyPress(object sender, EventArgs e)
         {
-            _mockEmployee.Oib = OibTextBox.Text;
+            OibTextBox.BackColor = OibExtension.TryOib(out var inputOib, OibTextBox.Text) ? Color.LightGreen
+                : Color.IndianRed;
+            OibTextBox.Text = "";
+            OibTextBox.AppendText(inputOib);
         }
 
         private void CheckBoxSecondName_CheckedChanged(object sender, EventArgs e)
@@ -107,11 +85,13 @@ namespace Employees.Presentation.ManageEmployees
             {
                 SecondNameTextBox.Show();
                 SecondNameLabel.Show();
+                SecondNameTextBox.BackColor = Color.IndianRed;
             }
             else
             {
                 SecondNameTextBox.Hide();
                 SecondNameLabel.Hide();
+                SecondNameTextBox.BackColor = Color.LightGreen;
             }
         }
 
@@ -123,30 +103,39 @@ namespace Employees.Presentation.ManageEmployees
         private void ComboPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             _mockEmployee.Position = (Position)Enum.Parse(typeof(Position), ComboPosition.Text);
+            ComboPosition.BackColor = Color.LightGreen;
         }
 
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            _mockEmployee.Forename = NameTextBox.Text;
-            _mockEmployee.SecondForename = SecondNameTextBox.Text;
-            _mockEmployee.Surname = SecondNameTextBox.Text;
-            _mainRepository.DataEmployees.AddEmployee(_mockEmployee);
-            foreach (var project in ListProjects.CheckedItems)
+            if (CheckSave.CheckForm(this))
             {
-                var projectRef = _mainRepository.DataProjects.GetAllProjects()
-                    .Find(projectInQuestion => project.Equals(projectInQuestion));
-                var popoutEmployeeTime = new EmployeeTime(_mainRepository,_mockEmployee,projectRef);
-                popoutEmployeeTime.ShowDialog();
+                _mockEmployee.Forename = NameTextBox.Text;
+                _mockEmployee.SecondForename = SecondNameTextBox.Text;
+                _mockEmployee.Surname = SecondNameTextBox.Text;
+                _mockEmployee.Oib = OibTextBox.Text;
+                _mainRepository.DataEmployees.AddEmployee(_mockEmployee);
+                foreach (var project in ListProjects.CheckedItems)
+                {
+                    var projectRef = _mainRepository.DataProjects.GetAllProjects()
+                        .Find(projectInQuestion => project.Equals(projectInQuestion));
+                    var popoutEmployeeTime = new EmployeeTime(_mainRepository, _mockEmployee, projectRef);
+                    popoutEmployeeTime.ShowDialog();
+                }
+                Close();
             }
-            Close();
+            else
+            {
+                var popoutWarningWindow = new WarningTemplate("Please make sure all info is entered correctly");
+                popoutWarningWindow.ShowDialog();
+            }
+            
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-
     }
 }
