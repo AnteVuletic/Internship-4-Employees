@@ -12,7 +12,9 @@ using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
+using Employees.Infrastructure.Extension;
 using Employees.Presentation.ManageEmployees.Popouts;
+using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageEmployees
 {
@@ -46,14 +48,41 @@ namespace Employees.Presentation.ManageEmployees
                 ListProjects.Items.Add(project);
             }
         }
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        private void NameTextBox_KeyPress(object sender, EventArgs e)
         {
-            _mockEmployee.Forename = NameTextBox.Text;
+            if (NameExtension.TryName(out var inputName, NameTextBox.Text))
+            {
+                NameTextBox.Text = "";
+                NameTextBox.AppendText(inputName);
+                NameTextBox.BackColor = Color.LightGreen;
+                _mockEmployee.Forename = inputName;
+                
+            }
+            else
+            {
+                NameTextBox.Text = "";
+                NameTextBox.AppendText(inputName);
+                NameTextBox.BackColor = Color.IndianRed;
+            }
+            
         }
 
-        private void SurnameTextBox_TextChanged(object sender, EventArgs e)
+        private void SurnameTextBox_KeyPress(object sender, EventArgs e)
         {
-            _mockEmployee.Surname = SurnameTextBox.Text;
+            if (NameExtension.TryName(out var inputName, SurnameTextBox.Text))
+            {
+                SurnameTextBox.Text = "";
+                SurnameTextBox.AppendText(inputName);
+                SurnameTextBox.BackColor = Color.LightGreen;
+                _mockEmployee.Surname = inputName;
+
+            }
+            else
+            {
+                SurnameTextBox.Text = "";
+                SurnameTextBox.AppendText(inputName);
+                SurnameTextBox.BackColor = Color.IndianRed;
+            }
         }
 
         private void OibTextBox_TextChanged(object sender, EventArgs e)
@@ -104,9 +133,22 @@ namespace Employees.Presentation.ManageEmployees
             Close();
         }
 
-        private void SecondNameTextBox_TextChanged(object sender, EventArgs e)
+        private void SecondNameTextBox_KeyPress(object sender, EventArgs e)
         {
-            _mockEmployee.SecondForename = SecondNameTextBox.Text;
+            if (NameExtension.TryName(out var inputName, SecondNameTextBox.Text))
+            {
+                SecondNameTextBox.Text = "";
+                SecondNameTextBox.AppendText(inputName);
+                SecondNameTextBox.BackColor = Color.LightGreen;
+                _mockEmployee.SecondForename = inputName;
+
+            }
+            else
+            {
+                SecondNameTextBox.Text = "";
+                SecondNameTextBox.AppendText(inputName);
+                SecondNameTextBox.BackColor = Color.IndianRed;
+            }
         }
     }
 }

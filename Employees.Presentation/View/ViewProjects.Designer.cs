@@ -61,7 +61,7 @@ namespace Employees.Presentation.View
             this.ProjectList.BackColor = Color.Azure;
             this.ProjectList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.ProjectList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            this.ProjectList.TileSize = new Size(400,400);
+            this.ProjectList.TileSize = new Size(600,200);
             // 
             // ViewProjects
             // 

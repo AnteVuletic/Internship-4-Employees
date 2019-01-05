@@ -1,4 +1,6 @@
-﻿namespace Employees.Presentation.ManageEmployees
+﻿using System.Windows.Forms;
+
+namespace Employees.Presentation.ManageEmployees
 {
     partial class AddEmployee
     {
@@ -179,7 +181,7 @@
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(200, 20);
             this.NameTextBox.TabIndex = 15;
-            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
+            this.NameTextBox.KeyPress += new KeyPressEventHandler(this.NameTextBox_KeyPress);
             // 
             // SurnameTextBox
             // 
@@ -187,7 +189,7 @@
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SurnameTextBox.TabIndex = 16;
-            this.SurnameTextBox.TextChanged += new System.EventHandler(this.SurnameTextBox_TextChanged);
+            this.SurnameTextBox.KeyPress += new KeyPressEventHandler(this.SurnameTextBox_KeyPress);
             // 
             // OibTextBox
             // 
@@ -203,7 +205,7 @@
             this.SecondNameTextBox.Name = "SecondNameTextBox";
             this.SecondNameTextBox.Size = new System.Drawing.Size(200, 20);
             this.SecondNameTextBox.TabIndex = 18;
-            this.SecondNameTextBox.TextChanged += new System.EventHandler(this.SecondNameTextBox_TextChanged);
+            this.SecondNameTextBox.KeyPress += new KeyPressEventHandler(this.SecondNameTextBox_KeyPress);
             // 
             // SecondNameLabel
             // 

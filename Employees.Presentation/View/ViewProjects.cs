@@ -52,14 +52,7 @@ namespace Employees.Presentation.View
                             stringForStaging += $" {Environment.NewLine} {employee.Forename} {employee.Surname} {relationEmployeeProject.TimeOnProjectWeek}";
                         }
 
-                        if (ifChanged)
-                        {
-                            projectGroup.SubItems.Add(stringForStaging);
-                        }
-                        else
-                        {
-                            projectGroup.SubItems.Add(" ");
-                        }
+                        projectGroup.SubItems.Add(ifChanged ? stringForStaging : " ");
                     }
                     ProjectList.Items.Add(projectGroup);
                
