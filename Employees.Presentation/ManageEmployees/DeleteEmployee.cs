@@ -27,6 +27,13 @@ namespace Employees.Presentation.ManageEmployees
             _mainRepository = mainRepository;
             RefreshEmployee();
         }
+        public DeleteEmployee(MainRepository mainRepository, int indexPassed)
+        {
+            InitializeComponent();
+            _mainRepository = mainRepository;
+            _currentEmployeeIndex = indexPassed;
+            RefreshEmployee();
+        }
         private void RefreshEmployee()
         {
             _currentEmployee = _mainRepository.DataEmployees.GetAllEmployees()[_currentEmployeeIndex];

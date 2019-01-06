@@ -62,6 +62,8 @@ namespace Employees.Presentation.View
             this.ProjectList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.ProjectList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.ProjectList.TileSize = new Size(600,200);
+            this.ProjectList.MultiSelect = false;
+            this.ProjectList.SelectedIndexChanged += new EventHandler(this.ProjectList_SelectedIndexChanged);
             // 
             // ViewProjects
             // 

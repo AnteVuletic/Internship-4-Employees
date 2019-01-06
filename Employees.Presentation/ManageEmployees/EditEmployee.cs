@@ -32,6 +32,14 @@ namespace Employees.Presentation.ManageEmployees
             FillDropDownPosition();
             RefreshEmployee();
         }
+        public EditEmployee(MainRepository mainRepository,int indexPassed)
+        {
+            InitializeComponent();
+            _mainRepository = mainRepository;
+            FillDropDownPosition();
+            _currentEmployeeIndex = indexPassed;
+            RefreshEmployee();
+        }
         private void FillDropDownPosition()
         {
             var positionNames = Enum.GetNames(typeof(Position));

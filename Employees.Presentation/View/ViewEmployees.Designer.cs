@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Employees.Presentation.View
@@ -66,6 +67,9 @@ namespace Employees.Presentation.View
             this.EmployeeListView.Width = 0;
             this.EmployeeListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.EmployeeListView.Width = employeeListWidth;
+            this.EmployeeListView.MultiSelect = false;
+            this.EmployeeListView.FullRowSelect = true;
+            this.EmployeeListView.SelectedIndexChanged += new EventHandler(this.EmployeeListView_SelectedIndexChanged);
             // 
             // ViewEmployees
             // 

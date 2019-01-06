@@ -25,6 +25,13 @@ namespace Employees.Presentation.ManageProjects
             _mainRepository = mainRepository;
             CurrentProjectInfo();
         }
+        public RemoveProject(MainRepository mainRepository, int indexPassed)
+        {
+            InitializeComponent();
+            _mainRepository = mainRepository;
+            _currentProjectIndex = indexPassed;
+            CurrentProjectInfo();
+        }
         public void FillEmployeeList()
         {
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())

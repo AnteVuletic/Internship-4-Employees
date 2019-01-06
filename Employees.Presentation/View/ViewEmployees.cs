@@ -46,5 +46,13 @@ namespace Employees.Presentation.View
             }
         }
 
+        public void EmployeeListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (EmployeeListView.SelectedItems.Count == 0) return;
+            var indexOfEmployee = _mainRepository.DataEmployees.GetAllEmployees()
+                .FindIndex(employee => employee.Oib == EmployeeListView.SelectedItems[0].SubItems[0].Text);
+            new OptionsEmployees(_mainRepository, indexOfEmployee).ShowDialog();
+        }
+
     }
 }

@@ -31,6 +31,13 @@ namespace Employees.Presentation.ManageProjects
             _mainRepository = mainRepository;
             CurrentProjectInfo();
         }
+        public EditProject(MainRepository mainRepository,int indexPassed)
+        {
+            InitializeComponent();
+            _mainRepository = mainRepository;
+            _currentProjectIndex = indexPassed;
+            CurrentProjectInfo();
+        }
         public void FillEmployeeList()
         {
             EmployeeCheckedList.Items.Clear();
