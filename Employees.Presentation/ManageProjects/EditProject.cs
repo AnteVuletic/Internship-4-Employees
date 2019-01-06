@@ -215,7 +215,10 @@ namespace Employees.Presentation.ManageProjects
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-
+            foreach (var relationEmployeeProject in _employeesOnProject)
+            {
+                _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
+            }
             Close();
         }
         private void BtnSave_Click(object sender, EventArgs e)

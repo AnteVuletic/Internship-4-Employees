@@ -76,6 +76,7 @@ namespace Employees.Presentation.View
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             ((ContainerControl) this).AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 368);
+            this.MaximumSize = new System.Drawing.Size(637,368);
             this.Controls.Add(this.EmployeeListView);
             this.Name = "ViewEmployees";
             this.Text = "ViewEmployees";

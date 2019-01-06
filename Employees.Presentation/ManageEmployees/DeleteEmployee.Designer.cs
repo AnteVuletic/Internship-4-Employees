@@ -274,10 +274,13 @@
             // 
             // DeleteEmployee
             // 
+            this.AcceptButton = this.BtnDelete;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(358, 514);
+            this.ControlBox = false;
             this.Controls.Add(this.BirthdayTextBox);
             this.Controls.Add(this.PositionTextBox);
             this.Controls.Add(this.CurrentPageTextBox);
@@ -300,6 +303,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(374, 553);
             this.Name = "DeleteEmployee";
             this.Text = "DeleteEmployee";
             this.ResumeLayout(false);

@@ -115,6 +115,7 @@ namespace Employees.Presentation.ManageEmployees
             // BtnCancel
             // 
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnCancel.Location = new System.Drawing.Point(208, 471);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(111, 29);
@@ -292,7 +293,9 @@ namespace Employees.Presentation.ManageEmployees
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(331, 512);
+            this.ControlBox = false;
             this.Controls.Add(this.CurrentPageTextBox);
             this.Controls.Add(this.BtnFirstEmployee);
             this.Controls.Add(this.BtnLastEmployee);
@@ -315,6 +318,7 @@ namespace Employees.Presentation.ManageEmployees
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(347, 551);
             this.Name = "EditEmployee";
             this.Text = "EditEmployee";
             this.ResumeLayout(false);

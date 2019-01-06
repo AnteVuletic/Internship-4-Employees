@@ -58,6 +58,7 @@
             // BtnNo
             // 
             this.BtnNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BtnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.BtnNo.Location = new System.Drawing.Point(317, 73);
             this.BtnNo.Name = "BtnNo";
@@ -69,12 +70,16 @@
             // 
             // WarningAreYouSure
             // 
+            this.AcceptButton = this.BtnYes;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtnNo;
             this.ClientSize = new System.Drawing.Size(495, 143);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnNo);
             this.Controls.Add(this.BtnYes);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(511, 182);
             this.Name = "WarningAreYouSure";
             this.Text = "WarningAreYouSure";
             this.ResumeLayout(false);

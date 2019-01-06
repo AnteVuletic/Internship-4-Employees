@@ -161,6 +161,7 @@
             // BtnCancel
             // 
             this.BtnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.BtnCancel.Location = new System.Drawing.Point(237, 497);
             this.BtnCancel.Name = "BtnCancel";
@@ -189,10 +190,13 @@
             // 
             // AddProject
             // 
+            this.AcceptButton = this.BtnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(363, 539);
+            this.ControlBox = false;
             this.Controls.Add(this.IsActiveCheckBox);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnSave);
@@ -207,6 +211,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MaximumSize = new System.Drawing.Size(379, 578);
             this.Name = "AddProject";
             this.Text = "AddProject";
             this.ResumeLayout(false);

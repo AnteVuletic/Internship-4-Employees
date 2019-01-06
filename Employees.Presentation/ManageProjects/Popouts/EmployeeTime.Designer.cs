@@ -63,6 +63,7 @@
             // 
             // BtnSave
             // 
+            this.BtnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnSave.Location = new System.Drawing.Point(438, 12);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(40, 26);
@@ -73,14 +74,18 @@
             // 
             // EmployeeTime
             // 
+            this.AcceptButton = this.BtnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BtnSave;
             this.ClientSize = new System.Drawing.Size(490, 45);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.TimeEmployeeTextbox);
             this.Controls.Add(this.ProjectNameTextbox);
             this.Controls.Add(this.EmployeInfoTextBox);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MaximumSize = new System.Drawing.Size(506, 84);
             this.Name = "EmployeeTime";
             this.Text = "EmployeeTime";
             this.ResumeLayout(false);

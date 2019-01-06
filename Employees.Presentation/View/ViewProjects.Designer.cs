@@ -62,7 +62,7 @@ namespace Employees.Presentation.View
             this.ProjectList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             this.ProjectList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             this.ProjectList.TileSize = new Size(600,200);
-            this.ProjectList.MultiSelect = false;
+            this.ProjectList.MultiSelect = false;           
             this.ProjectList.SelectedIndexChanged += new EventHandler(this.ProjectList_SelectedIndexChanged);
             // 
             // ViewProjects
@@ -70,6 +70,7 @@ namespace Employees.Presentation.View
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             ((ContainerControl)this).AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 368);
+            this.MaximumSize = new System.Drawing.Size(637,368);
             this.Controls.Add(this.ProjectList);
             this.Name = "ViewProjects";
             this.Text = "ViewProjects";

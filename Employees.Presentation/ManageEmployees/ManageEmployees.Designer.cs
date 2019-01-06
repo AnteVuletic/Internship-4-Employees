@@ -79,6 +79,7 @@
             this.Controls.Add(this.BtnDeleteEmployee);
             this.Controls.Add(this.BtnEditEmployee);
             this.Controls.Add(this.BtnAdd);
+            this.MaximumSize = new System.Drawing.Size(545, 171);
             this.Name = "ManageEmployees";
             this.Text = "ManageEmployees";
             this.ResumeLayout(false);

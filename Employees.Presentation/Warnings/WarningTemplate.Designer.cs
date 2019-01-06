@@ -44,6 +44,7 @@
             // BtnOk
             // 
             this.BtnOk.BackColor = System.Drawing.SystemColors.Control;
+            this.BtnOk.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnOk.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.BtnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.BtnOk.Location = new System.Drawing.Point(251, 45);
@@ -56,12 +57,16 @@
             // 
             // WarningTemplate
             // 
+            this.AcceptButton = this.BtnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.CancelButton = this.BtnOk;
             this.ClientSize = new System.Drawing.Size(562, 72);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnOk);
             this.Controls.Add(this.WarningTextBox);
+            this.MaximumSize = new System.Drawing.Size(578, 111);
             this.Name = "WarningTemplate";
             this.Text = "WarningTemplate";
             this.ResumeLayout(false);

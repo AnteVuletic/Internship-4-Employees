@@ -74,6 +74,7 @@
             this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.NameTextBox);
+            this.MaximumSize = new System.Drawing.Size(470, 97);
             this.Name = "OptionsEmployees";
             this.Text = "OptionsEmployees";
             this.ResumeLayout(false);

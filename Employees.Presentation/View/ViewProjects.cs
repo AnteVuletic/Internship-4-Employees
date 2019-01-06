@@ -40,11 +40,16 @@ namespace Employees.Presentation.View
                 }
 
                 foreach (var position in Enum.GetNames(typeof(Position)))
-                    {
-                        var stringForStaging = position+ ": " + Environment.NewLine;
+                {
+                    var employeesInPosition = _mainRepository.RelationEmployeeProject.FindAll(
+                        relation => relation.ProjectGuid == project.Id);
+                    var numOfEmployees = employeesInPosition.FindAll(employee =>
+                            _mainRepository.DataEmployees.GetByOib(employee.EmployeeOib).Position.ToString() ==
+                            position)
+                        .Count;
+                    var stringForStaging = $"{position} ({numOfEmployees}) :";
                         var ifChanged = false;
-                        foreach (var relationEmployeeProject in _mainRepository.RelationEmployeeProject.FindAll(
-                            relation => relation.ProjectGuid == project.Id))
+                        foreach (var relationEmployeeProject in employeesInPosition)
                         {
                             var employee = _mainRepository.DataEmployees.GetByOib(relationEmployeeProject.EmployeeOib);
                             if (employee.Position.ToString() != position) continue;

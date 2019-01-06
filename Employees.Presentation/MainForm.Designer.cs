@@ -92,6 +92,7 @@
             this.Controls.Add(this.BtnManageProjects);
             this.Controls.Add(this.BtnManageEmployees);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximumSize = new System.Drawing.Size(538, 333);
             this.Name = "MainForm";
             this.Text = "Project manager";
             this.ResumeLayout(false);

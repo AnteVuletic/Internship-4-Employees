@@ -255,10 +255,13 @@
             // 
             // RemoveProject
             // 
+            this.AcceptButton = this.BtnCancel;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(339, 527);
+            this.ControlBox = false;
             this.Controls.Add(this.EmployeeOnProjectList);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnDelete);
@@ -278,6 +281,7 @@
             this.Controls.Add(this.BtnLastProject);
             this.Controls.Add(this.BtnNextProject);
             this.Controls.Add(this.BtnPrevProject);
+            this.MaximumSize = new System.Drawing.Size(355, 566);
             this.Name = "RemoveProject";
             this.Text = "RemoveProject";
             this.ResumeLayout(false);

@@ -78,6 +78,7 @@
             this.Controls.Add(this.BtnDeleteProject);
             this.Controls.Add(this.BtnEditProject);
             this.Controls.Add(this.BtnAddProject);
+            this.MaximumSize = new System.Drawing.Size(547, 170);
             this.Name = "ManageProjects";
             this.Text = "ManageProjects";
             this.ResumeLayout(false);

@@ -258,7 +258,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.CancelButton = this.BtnCancel;
             this.ClientSize = new System.Drawing.Size(362, 500);
+            this.ControlBox = false;
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.CurrentProjectTextBox);
             this.Controls.Add(this.BtnFirstProject);
@@ -278,6 +280,7 @@
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(378, 539);
             this.Name = "EditProject";
             this.Text = "EditProject";
             this.ResumeLayout(false);
