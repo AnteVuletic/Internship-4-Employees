@@ -21,7 +21,7 @@ namespace Employees.Presentation.ManageEmployees
 {
     public partial class EditEmployee : Form
     {
-        private MainRepository _mainRepository;
+        private readonly MainRepository _mainRepository;
         private int _currentEmployeeIndex = 0;
         private Employee _mockEmployee;
         private Employee _currentEmployee;
@@ -188,19 +188,24 @@ namespace Employees.Presentation.ManageEmployees
 
                 foreach (var checkedItem in ListProjects.CheckedItems)
                 {
+                    RelationEmployeeProject relationFound = null;
                     var projectFound = _mainRepository.DataProjects.GetAllProjects().Find(projectInQuestion => (projectInQuestion is Project project)
                         ? project.ToString() == checkedItem.ToString()
                         : projectInQuestion.ToString() == checkedItem.ToString());
                     foreach (var relationEmployeeProject in tmpRelationEmployeeProjectList)
                     {
-                        if (relationEmployeeProject.ProjectGuid == projectFound.Id)
-                        {
-                            _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee,projectFound));
-                            new EmployeeTime(_mainRepository,_mockEmployee,projectFound,relationEmployeeProject.TimeOnProjectWeek).ShowDialog();
-                        }
-                        else
-                            new EmployeeTime(_mainRepository, _mockEmployee, projectFound).ShowDialog();
+                        if (relationEmployeeProject.ProjectGuid != projectFound.Id) continue;
+                        relationFound = relationEmployeeProject;
+                        break;
                     }
+
+                    if (relationFound != null)
+                    {
+                        _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee, projectFound));
+                        new EmployeeTime(_mainRepository, _mockEmployee, projectFound, relationFound.TimeOnProjectWeek).ShowDialog();
+                    }
+                    else
+                        new EmployeeTime(_mainRepository, _mockEmployee, projectFound).ShowDialog();
                 }
             }
 

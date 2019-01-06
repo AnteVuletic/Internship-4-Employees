@@ -57,15 +57,7 @@ namespace Employees.Presentation.ManageEmployees.Popouts
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (_flagForEdit)
-            {
-                var relationFound = _mainRepository.RelationEmployeeProject.Find(relation => relation.ProjectGuid == _project.Id);
-                relationFound.TimeOnProjectWeek = _tmpTimeWeek;
-            }
-            else
-            {
-                _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_employee,_project,_tmpTimeWeek));
-            }
+            _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_employee,_project,_tmpTimeWeek));
             Close();
         }
     }

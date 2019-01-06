@@ -71,6 +71,7 @@ namespace Employees.Presentation.ManageEmployees
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
+            if (new WarningAreYouSure().ShowDialog() == DialogResult.No) return;
             var isDeletable = true;
             foreach (var checkedItem in ListProjects.CheckedItems)
             {

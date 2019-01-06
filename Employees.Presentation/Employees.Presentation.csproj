@@ -133,6 +133,12 @@
       <DependentUpon>ViewProjects.cs</DependentUpon>
     </Compile>
     <Compile Include="Warnings\CheckSave.cs" />
+    <Compile Include="Warnings\WarningAreYouSure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warnings\WarningAreYouSure.Designer.cs">
+      <DependentUpon>WarningAreYouSure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warnings\WarningTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ViewProjects.resx">
       <DependentUpon>ViewProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warnings\WarningAreYouSure.resx">
+      <DependentUpon>WarningAreYouSure.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warnings\WarningTemplate.resx">
       <DependentUpon>WarningTemplate.cs</DependentUpon>
