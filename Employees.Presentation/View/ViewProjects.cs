@@ -25,6 +25,13 @@ namespace Employees.Presentation.View
 
         public void RefreshProjectList()
         {
+            ProjectList.View = System.Windows.Forms.View.Tile;
+            ProjectList.Columns.Add(new ColumnHeader("Project").Text = "Project");
+            ProjectList.Columns.Add(new ColumnHeader("ProjectDate").Text = "Project Date");
+            foreach (var position in Enum.GetNames(typeof(Position)))
+            {
+                ProjectList.Columns.Add(new ColumnHeader(position).Text = position);
+            }
             foreach (var project in _mainRepository.DataProjects.GetAllProjects())
             {
 

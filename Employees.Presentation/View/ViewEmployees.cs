@@ -23,6 +23,17 @@ namespace Employees.Presentation.View
 
         public void FillEmployeeList()
         {
+            EmployeeListView.Scrollable = true;
+            EmployeeListView.View = System.Windows.Forms.View.Details;
+            EmployeeListView.Columns.Add(new ColumnHeader("OIB").Text = "OIB");
+            EmployeeListView.Columns.Add(new ColumnHeader("Name").Text = "Name");
+            EmployeeListView.Columns.Add(new ColumnHeader("SecondName").Text = "Second name");
+            EmployeeListView.Columns.Add(new ColumnHeader("Surname").Text = "Surname");
+            EmployeeListView.Columns.Add(new ColumnHeader("Position").Text = "Position");
+            EmployeeListView.Columns.Add(new ColumnHeader("Birthday").Text = "Birthday");
+            EmployeeListView.Columns.Add(new ColumnHeader("Hours").Text = "Weekly hours");
+            EmployeeListView.Columns.Add(new ColumnHeader("Finished").Text = "Finished projects");
+            EmployeeListView.Columns.Add(new ColumnHeader("Active").Text = "Active projects");
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())
             {
                 var oneRow = new ListViewItem(employee.Oib);
@@ -53,6 +64,5 @@ namespace Employees.Presentation.View
                 .FindIndex(employee => employee.Oib == EmployeeListView.SelectedItems[0].SubItems[0].Text);
             new OptionsEmployees(_mainRepository, indexOfEmployee).ShowDialog();
         }
-
     }
 }
