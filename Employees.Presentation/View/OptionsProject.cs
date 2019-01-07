@@ -33,7 +33,8 @@ namespace Employees.Presentation.View
         }
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            new RemoveProject(_mainRepository, _indexOfProject).ShowDialog();
+            if(new RemoveProject(_mainRepository, _indexOfProject).ShowDialog() == DialogResult.OK)
+                Close();
         }
 
         private void BtnFinish_Click(object sender, EventArgs e)

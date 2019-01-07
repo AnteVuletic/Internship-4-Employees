@@ -123,6 +123,7 @@ namespace Employees.Presentation.ManageEmployees
             // ComboPosition
             // 
             this.ComboPosition.BackColor = System.Drawing.Color.IndianRed;
+            this.ComboPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboPosition.FormattingEnabled = true;
             this.ComboPosition.Location = new System.Drawing.Point(102, 286);
             this.ComboPosition.Name = "ComboPosition";
@@ -199,7 +200,7 @@ namespace Employees.Presentation.ManageEmployees
             // 
             // SecondNameTextBox
             // 
-            this.SecondNameTextBox.BackColor = System.Drawing.Color.IndianRed;
+            this.SecondNameTextBox.BackColor = System.Drawing.Color.LightGreen;
             this.SecondNameTextBox.Location = new System.Drawing.Point(102, 129);
             this.SecondNameTextBox.Name = "SecondNameTextBox";
             this.SecondNameTextBox.Size = new System.Drawing.Size(200, 20);
@@ -215,6 +216,7 @@ namespace Employees.Presentation.ManageEmployees
             this.SecondNameLabel.Size = new System.Drawing.Size(85, 20);
             this.SecondNameLabel.TabIndex = 19;
             this.SecondNameLabel.Text = "2nd Name";
+            this.SecondNameLabel.Visible = false;
             // 
             // OibTextBox
             // 

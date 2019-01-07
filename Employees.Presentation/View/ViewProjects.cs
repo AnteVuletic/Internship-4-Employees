@@ -76,6 +76,8 @@ namespace Employees.Presentation.View
             if (ProjectList.SelectedItems.Count == 0) return;
             var indexOfProject = _mainRepository.DataProjects.GetAllProjects().FindIndex(projectTest => projectTest.Name == ProjectList.SelectedItems[0].SubItems[0].Text);
             new OptionsProject(_mainRepository, indexOfProject).ShowDialog();
+            ProjectList.Clear();
+            RefreshProjectList();
         }
 
     }

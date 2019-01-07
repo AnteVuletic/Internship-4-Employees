@@ -63,6 +63,8 @@ namespace Employees.Presentation.View
             var indexOfEmployee = _mainRepository.DataEmployees.GetAllEmployees()
                 .FindIndex(employee => employee.Oib == EmployeeListView.SelectedItems[0].SubItems[0].Text);
             new OptionsEmployees(_mainRepository, indexOfEmployee).ShowDialog();
+            EmployeeListView.Clear();
+            FillEmployeeList();
         }
     }
 }

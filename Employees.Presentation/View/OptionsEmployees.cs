@@ -32,7 +32,8 @@ namespace Employees.Presentation.View
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            new DeleteEmployee(_mainRepository, _indexEmployee).ShowDialog();
+            if(new DeleteEmployee(_mainRepository, _indexEmployee).ShowDialog() == DialogResult.OK )
+                Close();
         }
     }
 }

@@ -20,11 +20,12 @@ namespace Employees.Presentation.ManageEmployees
     {
         private MainRepository _mainRepository;
         private Employee _currentEmployee;
-        private int _currentEmployeeIndex = 0;
+        private int _currentEmployeeIndex;
         public DeleteEmployee(MainRepository mainRepository)
         {
             InitializeComponent();
             _mainRepository = mainRepository;
+            _currentEmployeeIndex = 0;
             RefreshEmployee();
         }
         public DeleteEmployee(MainRepository mainRepository, int indexPassed)
@@ -88,7 +89,7 @@ namespace Employees.Presentation.ManageEmployees
                 _mainRepository.RelationEmployeeProject.RemoveAll(
                     project => project.EmployeeOib == _currentEmployee.Oib);
                 _mainRepository.DataEmployees.GetAllEmployees().Remove(_currentEmployee);
-                RefreshEmployee();
+                DialogResult = DialogResult.OK;
             }
             else
             {

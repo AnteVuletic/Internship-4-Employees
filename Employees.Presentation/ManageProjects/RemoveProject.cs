@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
+using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageProjects
 {
@@ -34,10 +35,11 @@ namespace Employees.Presentation.ManageProjects
         }
         public void FillEmployeeList()
         {
+            EmployeeOnProjectList.Clear();
             foreach (var employee in _mainRepository.DataEmployees.GetAllEmployees())
             {
                 if (_mainRepository.RelationEmployeeProject.Contains(
-                    new RelationEmployeeProject(employee, _currentProject)))
+                    new RelationEmployeeProject(employee, _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex])))
                     EmployeeOnProjectList.Items.Add(employee.ToString());
             }
         }
@@ -114,14 +116,15 @@ namespace Employees.Presentation.ManageProjects
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult = DialogResult.Cancel;
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
+            if (new WarningAreYouSure().ShowDialog() == DialogResult.No) return;
             _mainRepository.RelationEmployeeProject.RemoveAll(project => project.ProjectGuid == _currentProject.Id);
             _mainRepository.DataProjects.RemoveProjectById(_currentProject.Id);
-            Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }
