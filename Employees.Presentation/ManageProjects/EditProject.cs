@@ -12,19 +12,19 @@ using Employees.Data;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
-using Employees.Presentation.ManageEmployees.Popouts;
+using Employees.Presentation.ManageProjects.Popouts;
 using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageProjects
 {
     public partial class EditProject : Form
     {
-        private MainRepository _mainRepository;
+        private readonly MainRepository _mainRepository;
         private ProjectPlan _currentProjectPlan;
         private int _currentProjectIndex = 0;
         private ProjectPlan _mockProjectPlan;
         private Project _mockProject;
-        private List<RelationEmployeeProject> _employeesOnProject = new List<RelationEmployeeProject>();
+        private readonly List<RelationEmployeeProject> _employeesOnProject = new List<RelationEmployeeProject>();
         public EditProject(MainRepository mainRepository)
         {
             InitializeComponent();

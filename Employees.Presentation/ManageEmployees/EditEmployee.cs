@@ -14,7 +14,7 @@ using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
 using Employees.Infrastructure.Enums;
 using Employees.Infrastructure.Extension;
-using Employees.Presentation.ManageEmployees.Popouts;
+using Employees.Presentation.ManageProjects.Popouts;
 using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageEmployees

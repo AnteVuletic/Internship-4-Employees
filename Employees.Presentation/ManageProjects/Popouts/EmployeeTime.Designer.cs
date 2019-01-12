@@ -1,4 +1,4 @@
-﻿namespace Employees.Presentation.ManageEmployees.Popouts
+﻿namespace Employees.Presentation.ManageProjects.Popouts
 {
     partial class EmployeeTime
     {
@@ -63,7 +63,6 @@
             // 
             // BtnSave
             // 
-            this.BtnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnSave.Location = new System.Drawing.Point(438, 12);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(40, 26);
@@ -77,7 +76,6 @@
             this.AcceptButton = this.BtnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.BtnSave;
             this.ClientSize = new System.Drawing.Size(490, 45);
             this.ControlBox = false;
             this.Controls.Add(this.BtnSave);

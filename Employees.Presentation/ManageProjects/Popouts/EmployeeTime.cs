@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
+using Employees.Presentation.Warnings;
 
-namespace Employees.Presentation.ManageEmployees.Popouts
+namespace Employees.Presentation.ManageProjects.Popouts
 {
     public partial class EmployeeTime : Form
     {
-        private MainRepository _mainRepository;
+        private readonly MainRepository _mainRepository;
         private readonly Employee _employee;
         private readonly ProjectPlan _project;
         private int _tmpTimeWeek;
-        private bool _flagForEdit = false;
+        private readonly bool _flagForEdit;
         public EmployeeTime(MainRepository mainRepository, Employee employee, ProjectPlan project)
         {
             InitializeComponent();
@@ -57,8 +51,19 @@ namespace Employees.Presentation.ManageEmployees.Popouts
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_employee,_project,_tmpTimeWeek));
-            Close();
+            if(_tmpTimeWeek == 0 )
+            {
+               new WarningTemplate("Please enter a value that's not 0.").ShowDialog();
+
+            }else if (_tmpTimeWeek > 168)
+            {
+                new WarningTemplate("There' only 168 hours in a week.").ShowDialog();
+            }
+            else
+            {
+                _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_employee,_project,_tmpTimeWeek));
+                Close();
+            }
         }
     }
 }
