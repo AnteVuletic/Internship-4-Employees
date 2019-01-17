@@ -12,8 +12,8 @@ namespace Employees.Infrastructure.Extension
         public static bool TryOib(out string destination, string input)
         {
             input = input.Trim();
-            var ifMatch = Regex.Match(input, @"[^0-9]");
-            if (ifMatch.Length != 0)
+            var isMatch = Regex.Match(input, @"[^0-9]");
+            if (isMatch.Length != 0)
             {
                 input = Regex.Replace(input, @"[^0-9]", "");
                 destination = input;

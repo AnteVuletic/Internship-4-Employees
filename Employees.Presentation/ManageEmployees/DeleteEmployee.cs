@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Data.Enums;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
-using Employees.Infrastructure.Enums;
 using Employees.Presentation.Warnings;
 
 namespace Employees.Presentation.ManageEmployees

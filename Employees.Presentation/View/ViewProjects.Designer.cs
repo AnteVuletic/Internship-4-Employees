@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Employees.Infrastructure.Enums;
 
 namespace Employees.Presentation.View
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Employees.Infrastructure.Enums;
+using Employees.Data.Enums;
 
 namespace Employees.Data
 {

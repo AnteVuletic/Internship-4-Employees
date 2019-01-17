@@ -9,10 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Employees.Data;
+using Employees.Data.Enums;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
-using Employees.Infrastructure.Enums;
 using Employees.Infrastructure.Extension;
 using Employees.Presentation.ManageProjects.Popouts;
 using Employees.Presentation.Warnings;
@@ -201,8 +201,7 @@ namespace Employees.Presentation.ManageEmployees
 
                     if (relationFound != null)
                     {
-                        _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee, projectFound));
-                        new EmployeeTime(_mainRepository, _mockEmployee, projectFound, relationFound.TimeOnProjectWeek).ShowDialog();
+                        _mainRepository.RelationEmployeeProject.Add(new RelationEmployeeProject(_mockEmployee, projectFound,relationFound.TimeOnProjectWeek));
                     }
                     else
                         new EmployeeTime(_mainRepository, _mockEmployee, projectFound).ShowDialog();

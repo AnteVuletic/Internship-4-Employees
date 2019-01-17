@@ -70,7 +70,6 @@
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(212, 20);
             this.NameTextBox.TabIndex = 2;
-            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // RealCheckbox
             // 

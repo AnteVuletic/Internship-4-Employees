@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\Position.cs" />
     <Compile Include="Extension\NameExtension.cs" />
     <Compile Include="Extension\OibExtension.cs" />
+    <Compile Include="Extension\ProjectNameExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

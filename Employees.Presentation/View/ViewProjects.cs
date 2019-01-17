@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Employees.Data.Enums;
 using Employees.Data.Project;
 using Employees.Domain.Repository;
-using Employees.Infrastructure.Enums;
 
 namespace Employees.Presentation.View
 {

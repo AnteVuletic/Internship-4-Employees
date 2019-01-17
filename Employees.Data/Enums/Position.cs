@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Employees.Infrastructure.Enums
+namespace Employees.Data.Enums
 {
     public enum Position
     {

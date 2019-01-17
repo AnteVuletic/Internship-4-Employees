@@ -11,6 +11,7 @@ using Employees.Data;
 using Employees.Data.Project;
 using Employees.Domain.Database_Scheme;
 using Employees.Domain.Repository;
+using Employees.Infrastructure.Extension;
 using Employees.Presentation.ManageProjects.Popouts;
 using Employees.Presentation.Warnings;
 
@@ -69,14 +70,6 @@ namespace Employees.Presentation.ManageProjects
             IsActiveCheckBox.BackColor = IsActiveCheckBox.Checked ? Color.PaleGreen : Color.PaleVioletRed;
         }
 
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (RealCheckbox.Checked)
-                _project.Name = NameTextBox.Text;
-            else
-                _projectPlan.Name = NameTextBox.Text;
-        }
-
         private void StartDatePicker_ValueChanged(object sender, EventArgs e)
         {
             _project.StartDate = StartDatePicker.Value;
@@ -98,12 +91,10 @@ namespace Employees.Presentation.ManageProjects
                 }
                 else
                 {
-
                     if (!RealCheckbox.Checked)
                     {
-                        _projectPlan.Name = _projectPlan.Name.Trim();
-                        _projectPlan.Name = _projectPlan.Name.First().ToString().ToUpper() +
-                                            string.Join("", _projectPlan.Name.Skip(1));
+                        ProjectNameExtension.TryProjectName(out var NameAdjusted, NameTextBox.Text);
+                        _projectPlan.Name = NameAdjusted;
                         _mainRepository.DataProjects.AddProject(_projectPlan);
                         foreach (var selectedEmployee in _selectedEmployees)
                         {
@@ -113,9 +104,8 @@ namespace Employees.Presentation.ManageProjects
                     }
                     else
                     {
-                        _project.Name = _project.Name.Trim();
-                        _project.Name = _project.Name.First().ToString().ToUpper() +
-                                            string.Join("", _project.Name.Skip(1));
+                        ProjectNameExtension.TryProjectName(out var NameAdjusted, NameTextBox.Text);
+                        _project.Name = NameAdjusted;
                         _mainRepository.DataProjects.AddProject(_project);
                         foreach (var selectedEmployee in _selectedEmployees)
                         {
@@ -123,11 +113,9 @@ namespace Employees.Presentation.ManageProjects
                             popoutEmployeeSelectedWeeklyTime.ShowDialog();
                         }
                     }
-
                     Close();
                 }
-            }
-            
+            }            
         }
 
         private void EmployeeCheckedList_SelectedIndexChanged(object sender, EventArgs e)

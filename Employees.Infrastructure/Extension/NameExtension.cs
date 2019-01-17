@@ -12,8 +12,8 @@ namespace Employees.Infrastructure.Extension
         public static bool TryName(out string destination, string input)
         {
             input = input.Trim();
-            var ifMatch = Regex.Match(input, @"[^a-zA-Z]");
-            if (ifMatch.Length !=0)
+            var isMatch = Regex.Match(input, @"[^a-zA-Z]");
+            if (isMatch.Length !=0)
             {
                 input = Regex.Replace(input, @"[^a-zA-Z]", "");
                 destination = input;
