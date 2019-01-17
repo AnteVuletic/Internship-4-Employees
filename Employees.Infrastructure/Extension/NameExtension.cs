@@ -33,7 +33,7 @@ namespace Employees.Infrastructure.Extension
             if (input.Length >= 2)
             {
                 input = input.ToLower();
-                input = input.First().ToString().ToUpper() + string.Join("", input.Skip(1));
+                input = input[0].ToString().ToUpper() + string.Join("", input.Skip(1));
                 destination = input;
                 return true;
             }

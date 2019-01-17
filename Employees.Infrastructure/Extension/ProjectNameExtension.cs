@@ -11,7 +11,7 @@ namespace Employees.Infrastructure.Extension
         public static bool TryProjectName(out string destination, string input)
         {
             destination = input.Trim();
-            destination = destination.First().ToString().ToUpper() +
+            destination = destination[0].ToString().ToUpper() +
                           string.Join("", destination.Skip(1));
             return true;
         }
