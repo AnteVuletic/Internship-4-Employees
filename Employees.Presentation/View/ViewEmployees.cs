@@ -57,7 +57,7 @@ namespace Employees.Presentation.View
             }
         }
 
-        public void EmployeeListView_SelectedIndexChanged(object sender, EventArgs e)
+        public void EmployeeListView_Click(object sender, EventArgs e)
         {
             if (EmployeeListView.SelectedItems.Count == 0) return;
             var indexOfEmployee = _mainRepository.DataEmployees.GetAllEmployees()

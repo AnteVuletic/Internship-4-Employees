@@ -51,7 +51,7 @@ namespace Employees.Presentation.View
             this.EmployeeListView.TabIndex = 0;
             this.TooltipMain.SetToolTip(this.EmployeeListView, "Select any employee to manipulate data.");
             this.EmployeeListView.UseCompatibleStateImageBehavior = false;
-            this.EmployeeListView.SelectedIndexChanged += new System.EventHandler(this.EmployeeListView_SelectedIndexChanged);
+            this.EmployeeListView.Click += new System.EventHandler(this.EmployeeListView_Click);
             // 
             // ViewEmployees
             // 
