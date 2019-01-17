@@ -70,6 +70,11 @@ namespace Employees.Presentation.ManageProjects
         {
             _mockProject = null;
             _mockProjectPlan = null;
+            if (_employeesOnProject.Count != 0)
+            {
+                ReloadRelation();
+                _employeesOnProject.Clear();
+            }
             GetCurrentProject();
             if (!(_currentProjectPlan is Project))
             {
@@ -215,11 +220,16 @@ namespace Employees.Presentation.ManageProjects
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            ReloadRelation();
+            Close();
+        }
+
+        private void ReloadRelation()
+        {
             foreach (var relationEmployeeProject in _employeesOnProject)
             {
                 _mainRepository.RelationEmployeeProject.Add(relationEmployeeProject);
             }
-            Close();
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
@@ -246,16 +256,16 @@ namespace Employees.Presentation.ManageProjects
                     foreach (var checkedItem in EmployeeCheckedList.CheckedItems)
                     {
                         var checkedEmployee = _mainRepository.DataEmployees.GetAllEmployees()
-                            .Find(employee => employee.Equals(checkedItem));
+                            .Find(employee => employee.ToString() == checkedItem.ToString());
                         EmployeeTime popoutEmployeeTime;
-                        if (_employeesOnProject.Contains(new RelationEmployeeProject(checkedEmployee, _currentProjectPlan)))
+                        if (_employeesOnProject.Contains(new RelationEmployeeProject(checkedEmployee, _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex])))
                         {
-                            popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan
+                            popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex]
                                 , _employeesOnProject.Find(relation => relation.EmployeeOib == checkedEmployee.Oib).TimeOnProjectWeek);
                         }
                         else
                         {
-                            popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _currentProjectPlan);
+                            popoutEmployeeTime = new EmployeeTime(_mainRepository, checkedEmployee, _mainRepository.DataProjects.GetAllProjects()[_currentProjectIndex]);
                         }
                         popoutEmployeeTime.ShowDialog();
                     }

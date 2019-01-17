@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Database Scheme\EmployeeRepo.cs" />
-    <Compile Include="Database Scheme\RelationEmployeeProject.cs" />
-    <Compile Include="Database Scheme\ProjectRepo.cs" />
+    <Compile Include="Repository\EmployeeRepo.cs" />
+    <Compile Include="Repository\RelationEmployeeProject.cs" />
+    <Compile Include="Repository\ProjectRepo.cs" />
     <Compile Include="Repository\MainRepository.cs" />
   </ItemGroup>
   <ItemGroup>
